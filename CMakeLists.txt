@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 3.15)
 project(Engine)
 
-
+#C++标准11
 set(CMAKE_CXX_STANDARD 11)
-include_directories(./include)
-link_directories(./lib)
 
-add_executable(Engine main.cpp)
+#头文件目录
+include_directories(./include)
+
+add_executable(Engine LearnGl/main.cpp)
+
+#静态库
+target_link_libraries(Engine ${CMAKE_SOURCE_DIR}/lib/glad.a)
+target_link_libraries(Engine ${CMAKE_SOURCE_DIR}/lib/libglfw3.a)
+target_link_libraries(Engine  GL m Xrandr Xi X11 Xxf86vm pthread dl Xinerama Xcursor)
