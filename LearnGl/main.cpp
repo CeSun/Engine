@@ -35,11 +35,11 @@ void init();
 
 int main() {
     glfwInit();
-    glfwInitHint(GLFW_VERSION_MAJOR,3);
-    glfwInitHint(GLFW_VERSION_MINOR,3);
-    glfwInitHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,0);
+    glfwWindowHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(width,height,title,NULL,NULL);
+    GLFWwindow* window = glfwCreateWindow(width,height,title, nullptr,nullptr);
     if(window == nullptr) {
         cout << "窗口创建失败" << endl;
         glfwTerminate();
@@ -56,7 +56,6 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(shaderProgram);
-
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 

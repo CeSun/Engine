@@ -15,7 +15,7 @@ IF (WIN32)
     target_link_libraries(Engine ${CMAKE_SOURCE_DIR}/lib/win_static_lib/libglad_debug.a)
     target_link_libraries(Engine ${CMAKE_SOURCE_DIR}/lib/win_static_lib/libglfw3.a)
 
-ELSEIF(UNIX && !APPLE)
+ELSEIF(UNIX AND NOT APPLE)
     MESSAGE(STATUS "当前类Unix系统(不包括OSX)")
     target_link_libraries(Engine ${CMAKE_SOURCE_DIR}/lib/linux_static_lib/glad.a)
     target_link_libraries(Engine ${CMAKE_SOURCE_DIR}/lib/linux_static_lib/libglfw3.a)
