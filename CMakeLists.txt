@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 project(Engine)
 
 #C++标准11
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 
 #头文件目录
 include_directories(${CMAKE_SOURCE_DIR}/include)

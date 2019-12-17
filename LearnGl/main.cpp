@@ -14,7 +14,6 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,0);
     glfwWindowHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE);
-
     GLFWwindow* window = glfwCreateWindow(width,height,title, nullptr,nullptr);
     if(window == nullptr) {
         cout << "窗口创建失败" << endl;

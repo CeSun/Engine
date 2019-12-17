@@ -45,13 +45,11 @@ void Texture::init() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     int width = 0, height = 0 , nrChannels = 0;
 
-    FILE * file = fopen("resource/wall.jpg","r");
-    stbi_uc *data = stbi_load_from_file(file , &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load("resource/wall.jpg" , &width, &height, &nrChannels, 0);
     if (data) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else {
+    } else {
         std::cout << "Failed to load texture" << std::endl;
     }
     stbi_image_free(data);
@@ -64,7 +62,7 @@ void Texture::draw() {
     glBindTexture(GL_TEXTURE_2D, texture);
     shader->use();
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
 }
 
