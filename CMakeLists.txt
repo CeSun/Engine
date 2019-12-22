@@ -26,6 +26,9 @@ IF (WIN32)
     target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglad_debug.a)
     target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglfw3.a)
 ELSEIF(UNIX AND NOT APPLE)
+    #linux下需要以下依赖
+    #sudo apt-get build-dep glfw
+    #sudo apt-get install xorg-dev libglu1-mesa-dev
     MESSAGE(STATUS "is like Unix")
     target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/glad.a)
     target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/libglfw3.a)
