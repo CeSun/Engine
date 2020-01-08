@@ -23,8 +23,8 @@ ENDIF()
 #跨平台的静态库配置
 IF (WIN32)
     MESSAGE(STATUS "IS Windows System")
-    target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglad_debug.a)
-    target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglfw3.a)
+    target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglad_x64.a)
+    target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglfw3_x64.a)
 ELSEIF(UNIX AND NOT APPLE)
     #linux下需要以下依赖
     #sudo apt-get build-dep glfw
