@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(Engine)
 #C++标准11
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 #设置输出目录
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)
 #设置子项目
@@ -12,9 +12,16 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 #
 IF (${PROJECT} STREQUAL "LEARN")      #学习Opengl项目
-    add_executable(Engine LearnGl/main.cpp LearnGl/Texture.cpp)
+    add_executable(Engine
+            # 本项目参与编译的Cpp文件
+            LearnGl/main.cpp
+            LearnGl/Texture.cpp
+            )
 ELSEIF(${PROJECT} STREQUAL "ENGINE")  #Engine项目
-    add_executable(Engine Engine/main.cpp)
+    add_executable(Engine
+            # 本项目参与编译的Cpp文件
+            Engine/main.cpp
+            )
 ENDIF()
 
 
