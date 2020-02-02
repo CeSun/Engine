@@ -15,8 +15,15 @@ namespace GameClient {
         virtual ~CEngine();
         void run ();
     private:
+        /// methods
         int init();
+        void processInput();
+        // attribute
         GLFWwindow* engineWindow = nullptr;
+        const static int major = 3;
+        const static int minor = 3;
+        const static int width = 800;
+        const static int height = 600;
     };
 }
 
