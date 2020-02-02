@@ -21,7 +21,7 @@ ELSEIF(${PROJECT} STREQUAL "ENGINE")  #Engine项目
     add_executable(Engine
             # 本项目参与编译的Cpp文件
             Engine/main.cpp
-            Engine/CEngine/CEngine.cpp)
+            Engine/CEngine/CEngine.cpp Engine/Demo/CDemo.cpp)
 ENDIF()
 
 

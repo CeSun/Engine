@@ -20,6 +20,7 @@ namespace GameClient {
         void processInput();
         // attribute
         GLFWwindow* engineWindow = nullptr;
+
         const static int major = 3;
         const static int minor = 3;
         const static int width = 800;

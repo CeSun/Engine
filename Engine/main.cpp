@@ -6,10 +6,10 @@
 
 
 int main(){
-
     using namespace std;
-    cout<< "Hello Engine" << endl;
     using namespace GameClient;
+
+    cout << "Game Start" << endl;
     CEngine engine;
     engine.run();
 
