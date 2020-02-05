@@ -3,7 +3,7 @@
 //
 
 #include "CEngine.h"
-#include "../Demo/CDemo.h"
+#include "../CDemo/CDemo.h"
 namespace GameClient {
     CDemo demo;
     CEngine::CEngine() {
@@ -43,7 +43,7 @@ namespace GameClient {
         // 初始化
         this->init();
         while(!glfwWindowShouldClose(this->engineWindow)) {
-            glClearColor(0.0f,0.0f,0.0f,1.0f);
+            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             demo.draw();
