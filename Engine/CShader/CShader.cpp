@@ -7,7 +7,7 @@
 #include <string>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
-#include "CShader.h"
+#include "CShader.hpp"
 
 namespace GameClient {
     enum CompileType {

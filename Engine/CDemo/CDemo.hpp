@@ -2,10 +2,10 @@
 // Created by SunCe on 2020/2/2.
 //
 
-#ifndef ENGINE_CDEMO_H
-#define ENGINE_CDEMO_H
+#ifndef ENGINE_CDEMO_HPP
+#define ENGINE_CDEMO_HPP
 
-#include "../CShader/CShader.h"
+#include "../CShader/CShader.hpp"
 
 namespace GameClient {
     class CDemo {
@@ -18,4 +18,4 @@ namespace GameClient {
         CShader* shader;
     };
 }
-#endif //ENGINE_CDEMO_H
+#endif //ENGINE_CDEMO_HPP

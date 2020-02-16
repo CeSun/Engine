@@ -2,8 +2,8 @@
 // Created by SunCe on 2020/2/3.
 //
 
-#ifndef ENGINE_CSHADER_H
-#define ENGINE_CSHADER_H
+#ifndef ENGINE_CSHADER_HPP
+#define ENGINE_CSHADER_HPP
 
 #include <glm/glm.hpp>
 #include <string>
@@ -30,4 +30,4 @@ namespace GameClient {
         unsigned ID;
     };
 }
-#endif //ENGINE_CSHADER_H
+#endif //ENGINE_CSHADER_HPP

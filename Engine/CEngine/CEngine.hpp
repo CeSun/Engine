@@ -2,8 +2,8 @@
 // Created by SunCe on 2020/2/1.
 //
 
-#ifndef ENGINE_CENGINE_H
-#define ENGINE_CENGINE_H
+#ifndef ENGINE_CENGINE_HPP
+#define ENGINE_CENGINE_HPP
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -28,4 +28,4 @@ namespace GameClient {
     };
 }
 
-#endif //ENGINE_CENGINE_H
+#endif //ENGINE_CENGINE_HPP
