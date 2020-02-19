@@ -33,7 +33,7 @@ namespace GameClient {
         lastY = ypos;
 
         this->mainCamera->setPitch(float(this->mainCamera->getPitch() + deltaY *0.01));
-        this->mainCamera->setYaw(float(this->mainCamera->getYaw() - deltaX * 0.01));
+        this->mainCamera->setYaw(float(this->mainCamera->getYaw() + deltaX * 0.01));
         this->mainCamera->upDateCameraMatrix();
 
         std::cout <<  this->mainCamera->getYaw() << "," << this->mainCamera->getPitch() << std::endl;
