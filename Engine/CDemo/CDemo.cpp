@@ -8,9 +8,8 @@
 #include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-
+#include <Engine/CCamera/CCamera.hpp>
 #include "CDemo.hpp"
-
 
 namespace GameClient {
 
@@ -26,6 +25,19 @@ namespace GameClient {
             2,3,0
     };
 
+    void CDemo::mouse_move(double xpos,double ypos) {
+        static double lastX, lastY;
+        float deltaX = xpos - lastX;
+        float deltaY = ypos - lastY;
+        lastX = xpos;
+        lastY = ypos;
+
+        this->mainCamera->setPitch(float(this->mainCamera->getPitch() + deltaY *0.01));
+        this->mainCamera->setYaw(float(this->mainCamera->getYaw() - deltaX * 0.01));
+        this->mainCamera->upDateCameraMatrix();
+
+        std::cout <<  this->mainCamera->getYaw() << "," << this->mainCamera->getPitch() << std::endl;
+    }
     void CDemo::init() {
 
         // 申请VAO对象
@@ -53,16 +65,16 @@ namespace GameClient {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
         this->shader = new CShader("./shader/shader.vs","./shader/shader.fs");
 
+        mainCamera = new CCamera(glm::vec3(0,0,0.0f),16.0,-12.0,glm::vec3(0,1.0f,0));
         // 矩阵
         glm::mat4 trans(1.0f);
         glm::mat4 modelMat(1.0f);
-        modelMat = glm::rotate(modelMat, glm::radians(-70.0f), glm::vec3(1.0f,0.0f,0.0f));
+        // modelMat = glm::rotate(modelMat, glm::radians(-45.0f), glm::vec3(1.0f,0.0f,0.0f));
+        modelMat = glm::translate(modelMat,glm::vec3(0.0,0.0,-3.0));
         glm::mat4 viewMat(1.0f);
-        viewMat = glm::translate(viewMat, glm::vec3(0,0,-3.0f));
+        viewMat = mainCamera->getViewMatrix();
         glm::mat4 projMat(1.0f);
         projMat = glm::perspective(glm::radians(45.0f),800.0f/600.0f,0.1f,100.0f);
-
-
         this->shader->use();
         this->shader->setMat4("modelMat",modelMat);
         this->shader->setMat4("viewMat",viewMat);
@@ -110,6 +122,9 @@ namespace GameClient {
         glBindTexture(GL_TEXTURE_2D, this->Texture);
         // 使用着色器
         this->shader->use();
+        glm::mat4 viewMat(1.0f);
+        viewMat = mainCamera->getViewMatrix();
+        this->shader->setMat4("viewMat",viewMat);
         // 绑定VAO
         glBindVertexArray(this->VAO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);

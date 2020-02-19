@@ -1,9 +1,9 @@
 //
 // Created by SunCe on 2020/2/1.
 //
-
+#include <iostream>
 #include "CEngine.hpp"
-#include "../CDemo/CDemo.hpp"
+#include <Engine/CDemo/CDemo.hpp>
 namespace GameClient {
     CDemo demo;
     CEngine::CEngine() {
@@ -14,15 +14,21 @@ namespace GameClient {
     }
     CEngine::~CEngine() {
         glfwTerminate();
-        delete this->engineWindow;
     }
 
+    CEngine& CEngine::getIntance() {
+        static CEngine Engine;
+        return Engine;
+    }
     int CEngine::init() {
         engineWindow = glfwCreateWindow(CEngine::width, CEngine::height, "GameEngine", nullptr, nullptr);
         if (engineWindow == nullptr) {
             return -1;
         }
         glfwMakeContextCurrent(this->engineWindow);
+        glfwSetInputMode(this->engineWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        glfwSetCursorPosCallback(this->engineWindow, mouse_callback);
+
         if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
             return -2;
         }
@@ -54,5 +60,12 @@ namespace GameClient {
             // 处理输入
             this->processInput();
         }
+    }
+
+    void CEngine::mouse_move(double xpos,double ypos) {
+        demo.mouse_move(xpos,ypos);
+    }
+    void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+        CEngine::getIntance().mouse_move(xpos,ypos);
     }
 }

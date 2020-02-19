@@ -10,9 +10,8 @@ int main(){
     using namespace GameClient;
 
     cout << "Game Start" << endl;
-    CEngine engine;
+    CEngine& engine = CEngine::getIntance();
     engine.run();
-
     cout << "Game End" << endl;
     return 0;
 }
