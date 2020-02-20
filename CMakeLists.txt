@@ -2,9 +2,8 @@ cmake_minimum_required(VERSION 3.15)
 
 # Client 带服务端，用于局域网对战，一个玩家的电脑作为服务端
 # Server 只有服务端，用于网络对战
-# set(program Client)
-set(program "Server")
-
+# Server OR Client
+set(program Client)
 project(Engine)
 #C++标准11
 set(CMAKE_CXX_STANDARD 11)
@@ -53,7 +52,6 @@ IF (WIN32)
     target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglfw3_x64.a)
 ELSEIF(UNIX AND NOT APPLE)
     #linux下需要以下依赖
-    #sudo apt-get build-dep glfw
     #sudo apt-get install xorg-dev libglu1-mesa-dev
     MESSAGE(STATUS "is like Unix")
     target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/glad.a)
