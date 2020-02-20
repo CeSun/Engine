@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Engine"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Engine">
+				<Option output="C:/Users/SunCE/CLionProjects/Engine/build/Client/GameClient.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/SunCE/CLionProjects/Engine/build/Client"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/SunCE/CLionProjects/Engine/include"/>
+					<Add directory="C:/Users/SunCE/CLionProjects/Engine"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 Engine"/>
+					<CompileFile command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Engine/fast">
+				<Option output="C:/Users/SunCE/CLionProjects/Engine/build/Client/GameClient.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/SunCE/CLionProjects/Engine/build/Client"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/SunCE/CLionProjects/Engine/include"/>
+					<Add directory="C:/Users/SunCE/CLionProjects/Engine"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/Program Files/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 Engine/fast"/>
+					<CompileFile command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/SunCE/CLionProjects/Engine/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Client/CCamera/CCamera.cpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Client/CCamera/CCamera.hpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Client/CClient/CClient.cpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Client/CClient/CClient.hpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Client/CDemo/CDemo.cpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Client/CDemo/CDemo.hpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Client/CShader/CShader.cpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Client/CShader/CShader.hpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Client/main.cpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Server/CMessage/CMessage.cpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Server/CMessage/CMessage.hpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Server/CServer/CServer.cpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/src/Server/CServer/CServer.hpp">
+			<Option target="Engine"/>
+		</Unit>
+		<Unit filename="C:/Users/SunCE/CLionProjects/Engine/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
