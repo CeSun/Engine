@@ -1,1 +1,0 @@
-../lib/win_static_lib/libglad_x64.a ../lib/win_static_lib/libglfw3_x64.a -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
