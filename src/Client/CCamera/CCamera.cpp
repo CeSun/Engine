@@ -27,6 +27,14 @@ namespace GameClient {
     }
     void CCamera::setPitch(float pitch) {
         this->pitch = pitch;
+        if (this->pitch > glm::radians(90.0f)) {
+            this->pitch =  glm::radians(90.0f);
+        }
+        else if (this->pitch <  glm::radians(-90.0f)) {
+            this->pitch =  glm::radians(-90.0f);
+        }
+
+
     }
     void CCamera::setYaw(float yaw) {
         this->yaw = yaw;

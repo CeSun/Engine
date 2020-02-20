@@ -2,7 +2,7 @@
 // Created by ce.a.sun on 2019/12/18.
 //
 #include <iostream>
-#include "CEngine/CEngine.hpp"
+#include "src/Client/CClient/CClient.hpp"
 
 
 int main(){
@@ -10,8 +10,8 @@ int main(){
     using namespace GameClient;
 
     cout << "Game Start" << endl;
-    CEngine& engine = CEngine::getIntance();
-    engine.run();
+    CClient& client = CClient::getIntance();
+    client.run();
     cout << "Game End" << endl;
     return 0;
 }

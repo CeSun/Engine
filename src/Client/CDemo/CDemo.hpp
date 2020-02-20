@@ -5,7 +5,7 @@
 #ifndef ENGINE_CDEMO_HPP
 #define ENGINE_CDEMO_HPP
 
-#include <Engine/CShader/CShader.hpp>
+#include <src/Client/CShader/CShader.hpp>
 
 namespace GameClient {
     class CCamera;
@@ -16,6 +16,7 @@ namespace GameClient {
         void mouse_move(double posx,double posy);
     private:
         unsigned int VAO,EBO;
+        unsigned int VBO;
         unsigned int Texture;
         CShader* shader;
         CCamera* mainCamera = nullptr;

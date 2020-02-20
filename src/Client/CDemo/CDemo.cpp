@@ -8,16 +8,16 @@
 #include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <Engine/CCamera/CCamera.hpp>
+#include <src/Client/CCamera/CCamera.hpp>
 #include "CDemo.hpp"
 
 namespace GameClient {
 
     float ver[] = {
-            -0.5f, 0.5f,0.0f, 0.0f, 1.0f,
-            -0.5f,-0.5f,0.0f, 0.0f, 0.0f,
-            0.5f,-0.5f,0.0f, 1.0f, 0.0f,
-            0.5f,0.5f,0.0f, 1.0f, 1.0f
+            -1.0f, 1.0f,0.0f, 0.0f, 1.0f,
+            -1.0f,-1.0f,0.0f, 0.0f, 0.0f,
+            1.0f,-1.0f,0.0f, 1.0f, 0.0f,
+            1.0f,1.0f,0.0f, 1.0f, 1.0f
     };
 
     unsigned  int indices[] = {
@@ -32,20 +32,17 @@ namespace GameClient {
         lastX = xpos;
         lastY = ypos;
 
-        this->mainCamera->setPitch(float(this->mainCamera->getPitch() + deltaY *0.01));
-        this->mainCamera->setYaw(float(this->mainCamera->getYaw() + deltaX * 0.01));
+        this->mainCamera->setPitch(float(this->mainCamera->getPitch() - deltaY *0.01));
+        this->mainCamera->setYaw(float(this->mainCamera->getYaw() - deltaX * 0.01));
         this->mainCamera->upDateCameraMatrix();
-
-        std::cout <<  this->mainCamera->getYaw() << "," << this->mainCamera->getPitch() << std::endl;
+        std::cout << this->mainCamera->getPitch() <<  "" << this->mainCamera->getYaw()<<std::endl;
     }
     void CDemo::init() {
 
-        // 申请VAO对象
-        glGenVertexArrays(1, &this->VAO);
-        // 绑定VAO
-        glBindVertexArray(this->VAO);
 
-        unsigned int VBO;
+
+
+
         // 申请VBO对象
         glGenBuffers(1, &VBO);
         // 绑定VBO
@@ -53,6 +50,11 @@ namespace GameClient {
 
         // 上传顶点数据至显存BUFFER
         glBufferData(GL_ARRAY_BUFFER, sizeof(ver), ver, GL_STATIC_DRAW);
+
+        // 申请VAO对象
+        glGenVertexArrays(1, &this->VAO);
+        // 绑定VAO
+        glBindVertexArray(this->VAO);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5* sizeof(float), nullptr);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5* sizeof(float), (void *) (3* sizeof(float)));
@@ -65,16 +67,16 @@ namespace GameClient {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
         this->shader = new CShader("./shader/shader.vs","./shader/shader.fs");
 
-        mainCamera = new CCamera(glm::vec3(0,0,0.0f),16.0,-12.0,glm::vec3(0,1.0f,0));
+        mainCamera = new CCamera(glm::vec3(0,0,0.0f),0.0,0.0,glm::vec3(0,1.0f,0));
         // 矩阵
         glm::mat4 trans(1.0f);
         glm::mat4 modelMat(1.0f);
         // modelMat = glm::rotate(modelMat, glm::radians(-45.0f), glm::vec3(1.0f,0.0f,0.0f));
-        modelMat = glm::translate(modelMat,glm::vec3(0.0,0.0,-3.0));
+         modelMat = glm::translate(modelMat,glm::vec3(0.0,0.0,-3.0));
         glm::mat4 viewMat(1.0f);
         viewMat = mainCamera->getViewMatrix();
         glm::mat4 projMat(1.0f);
-        projMat = glm::perspective(glm::radians(45.0f),800.0f/600.0f,0.1f,100.0f);
+        projMat = glm::perspective(glm::radians(45.0f),800.0f/600.0f,0.001f,100.0f);
         this->shader->use();
         this->shader->setMat4("modelMat",modelMat);
         this->shader->setMat4("viewMat",viewMat);
@@ -125,14 +127,12 @@ namespace GameClient {
         glm::mat4 viewMat(1.0f);
         viewMat = mainCamera->getViewMatrix();
         this->shader->setMat4("viewMat",viewMat);
-        // 绑定VAO
-        glBindVertexArray(this->VAO);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
+
+         glBindVertexArray(this->VAO);
+         glBindBuffer(GL_ARRAY_BUFFER, VBO);
+         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
 
         glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
-
-        // 绘制顶点
-        //glDrawArrays(GL_TRIANGLES, 0, 3);
     }
 
 }

@@ -11,11 +11,15 @@ include_directories(${CMAKE_SOURCE_DIR})
 
 add_executable(Engine
         # 本项目参与编译的Cpp文件
-        Engine/main.cpp
-        Engine/CEngine/CEngine.cpp
-        Engine/CDemo/CDemo.cpp
-        Engine/CShader/CShader.cpp
-        Engine/CCamera/CCamera.cpp
+        # 客户端
+        src/Client/main.cpp
+        src/Client/CClient/CClient.cpp
+        src/Client/CDemo/CDemo.cpp
+        src/Client/CShader/CShader.cpp
+        src/Client/CCamera/CCamera.cpp
+
+        # 服务端
+        src/Server/CServer/CServer.cpp
         )
 
 
@@ -33,7 +37,7 @@ ELSEIF(UNIX AND NOT APPLE)
     MESSAGE(STATUS "is like Unix")
     target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/glad.a)
     target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/libglfw3.a)
-    target_link_libraries(Engine  GL m Xrandr Xi X11 Xxf86vm pthread dl Xinerama Xcursor)
+    target_link_libraries(Engine GL m Xrandr Xi X11 Xxf86vm pthread dl Xinerama Xcursor)
 ELSEIF(APPLE)
     MESSAGE(ERROR "Not support OSX")
 ENDIF()

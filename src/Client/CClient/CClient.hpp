@@ -2,21 +2,21 @@
 // Created by SunCe on 2020/2/1.
 //
 
-#ifndef ENGINE_CENGINE_HPP
-#define ENGINE_CENGINE_HPP
+#ifndef ENGINE_CCLIENT_HPP
+#define ENGINE_CCLIENT_HPP
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace GameClient {
     class CCamera;
-    class CEngine {
+    class CClient {
     public:
-        static CEngine& getIntance();
-        virtual ~CEngine();
+        static CClient& getIntance();
+        virtual ~CClient();
         void run ();
     private:        // methods
-        CEngine();
+        CClient();
         int init();
         void processInput();
         void mouse_move(double x,double y);
@@ -33,4 +33,4 @@ namespace GameClient {
     void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 }
 
-#endif //ENGINE_CENGINE_HPP
+#endif //ENGINE_CCLIENT_HPP

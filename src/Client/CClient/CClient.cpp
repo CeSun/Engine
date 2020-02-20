@@ -2,26 +2,26 @@
 // Created by SunCe on 2020/2/1.
 //
 #include <iostream>
-#include "CEngine.hpp"
-#include <Engine/CDemo/CDemo.hpp>
+#include "CClient.hpp"
+#include <src/Client/CDemo/CDemo.hpp>
 namespace GameClient {
     CDemo demo;
-    CEngine::CEngine() {
+    CClient::CClient() {
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     }
-    CEngine::~CEngine() {
+    CClient::~CClient() {
         glfwTerminate();
     }
 
-    CEngine& CEngine::getIntance() {
-        static CEngine Engine;
+    CClient& CClient::getIntance() {
+        static CClient Engine;
         return Engine;
     }
-    int CEngine::init() {
-        engineWindow = glfwCreateWindow(CEngine::width, CEngine::height, "GameEngine", nullptr, nullptr);
+    int CClient::init() {
+        engineWindow = glfwCreateWindow(CClient::width, CClient::height, "GameEngine", nullptr, nullptr);
         if (engineWindow == nullptr) {
             return -1;
         }
@@ -32,7 +32,7 @@ namespace GameClient {
         if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
             return -2;
         }
-        glViewport(0 ,0, CEngine::width, CEngine::height);
+        glViewport(0 , 0, CClient::width, CClient::height);
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
 
@@ -40,12 +40,12 @@ namespace GameClient {
         return 0;
 
     }
-    void CEngine::processInput() {
+    void CClient::processInput() {
         if(glfwGetKey(this->engineWindow, GLFW_KEY_ESCAPE)) {
             glfwSetWindowShouldClose(this->engineWindow, GLFW_TRUE);
         }
     }
-    void CEngine::run() {
+    void CClient::run() {
         // 初始化
         this->init();
         while(!glfwWindowShouldClose(this->engineWindow)) {
@@ -62,10 +62,10 @@ namespace GameClient {
         }
     }
 
-    void CEngine::mouse_move(double xpos,double ypos) {
+    void CClient::mouse_move(double xpos, double ypos) {
         demo.mouse_move(xpos,ypos);
     }
     void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-        CEngine::getIntance().mouse_move(xpos,ypos);
+        CClient::getIntance().mouse_move(xpos, ypos);
     }
 }
