@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.15)
 
 # Client 带服务端，用于局域网对战，一个玩家的电脑作为服务端
 # Server 只有服务端，用于网络对战
-set(program Client)
-# set(program "Server")
+# set(program Client)
+set(program "Server")
 
 project(Engine)
 #C++标准11
