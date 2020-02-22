@@ -38,8 +38,8 @@ namespace GameClient {
             return -2;
         }
         glViewport(0 , 0, CClient::width, CClient::height);
-        // glEnable(GL_CULL_FACE);
-        // glCullFace(GL_BACK);
+        glEnable(GL_CULL_FACE);
+         glCullFace(GL_BACK);
 
         demo.init();
         return 0;

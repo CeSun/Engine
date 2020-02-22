@@ -25,8 +25,8 @@ namespace GameClient {
         GLFWwindow* engineWindow = nullptr;
         const static int major = 3;
         const static int minor = 3;
-        const static int width = 800;
-        const static int height = 600;
+        const static int width = 1024;
+        const static int height = 768;
         friend void mouse_callback(GLFWwindow* window, double xpos, double ypos);
     };
 
