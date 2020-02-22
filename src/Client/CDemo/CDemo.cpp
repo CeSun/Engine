@@ -10,7 +10,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <src/Client/CCamera/CCamera.hpp>
 #include "CDemo.hpp"
-
+#include <memory>
 namespace GameClient {
 
     float ver[] = {
@@ -37,19 +37,32 @@ namespace GameClient {
         this->mainCamera->upDateCameraMatrix();
         std::cout << this->mainCamera->getPitch() <<  "" << this->mainCamera->getYaw()<<std::endl;
     }
+
+
+    float skybox_bottom [] = {
+            200,-200,200.0f, 0.0f,1.0f,
+            -200,-200,200,0.0f,0.0f,
+            -200,-200,-200,1.0f,0.0f,
+            200,-200,-200,1.0f,1.0f
+    };
+    unsigned int skybox_bottom_vbo;
+    std::shared_ptr<CShader> skyboxShader[6] ;
     void CDemo::init() {
-
-
-
-
-
+        for(int i = 0 ; i < 6 ; i ++) {
+            skyboxShader[i] = std::make_shared<CShader>(*(new CShader("./shader/shader.vs","./shader/shader.fs")));
+        }
         // 申请VBO对象
         glGenBuffers(1, &VBO);
         // 绑定VBO
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
         // 上传顶点数据至显存BUFFER
         glBufferData(GL_ARRAY_BUFFER, sizeof(ver), ver, GL_STATIC_DRAW);
+
+
+        glGenBuffers(1, &skybox_bottom_vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, skybox_bottom_vbo);
+        // 上传顶点数据至显存BUFFER
+        glBufferData(GL_ARRAY_BUFFER, sizeof(skybox_bottom), skybox_bottom, GL_STATIC_DRAW);
 
         // 申请VAO对象
         glGenVertexArrays(1, &this->VAO);
@@ -76,7 +89,7 @@ namespace GameClient {
         glm::mat4 viewMat(1.0f);
         viewMat = mainCamera->getViewMatrix();
         glm::mat4 projMat(1.0f);
-        projMat = glm::perspective(glm::radians(45.0f),800.0f/600.0f,0.001f,100.0f);
+        projMat = glm::perspective(glm::radians(45.0f),800.0f/600.0f,0.001f,400.0f);
         this->shader->use();
         this->shader->setMat4("modelMat",modelMat);
         this->shader->setMat4("viewMat",viewMat);
@@ -114,7 +127,33 @@ namespace GameClient {
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
             delete[] data;
         }
-
+        glGenerateMipmap(GL_TEXTURE_2D);
+        skyboxShader[0]->use();
+        data = stbi_load("resource/container.jpg",&width, &height, &nrChannels,0);
+        if (data) {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            stbi_image_free(data);
+        } else {
+            data = new unsigned char[14];
+            // 红
+            data[0] = 0;
+            data[1] = 0;
+            data[2] = 0;
+            // 白
+            data[3] = 255;
+            data[4] = 0;
+            data[5] = 255;
+            data[6] = 0;
+            data[7] = 0;
+            data[8] = 255;
+            data[9] =  0;
+            data[10] = 255;
+            data[11] = 0;
+            data[12] = 0;
+            data[13] = 0;
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            delete[] data;
+        }
         glGenerateMipmap(GL_TEXTURE_2D);
     }
 
