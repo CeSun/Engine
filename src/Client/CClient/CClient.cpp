@@ -11,6 +11,11 @@ namespace GameClient {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+        // MacOS 预处理
+        #ifdef __APPLE__
+            glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+        #endif
     }
     CClient::~CClient() {
         glfwTerminate();
@@ -47,7 +52,8 @@ namespace GameClient {
     }
     void CClient::run() {
         // 初始化
-        this->init();
+        if(this->init())
+            return;
         while(!glfwWindowShouldClose(this->engineWindow)) {
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -58,13 +58,13 @@ ELSEIF(UNIX AND NOT APPLE)
     target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/libglfw3.a)
     target_link_libraries(Engine GL m Xrandr Xi X11 Xxf86vm pthread dl Xinerama Xcursor)
 ELSEIF(APPLE)
-
+    MESSAGE(STATUS "is OSX")
     target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/mac_static_lib/libGLAD.a)
     target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/mac_static_lib/libglfw3.a)
     target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/Cocoa.framework )
     target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/IOKit.framework )
-
-    MESSAGE(STATUS "is OSX")
+    target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/OpenGL.framework )
+    target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/CoreVideo.framework )
 ENDIF()
 MESSAGE(STATUS CMAKE_CURRRENT_BINARY_DIR)
 
