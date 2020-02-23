@@ -141,7 +141,7 @@ namespace GameClient {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         skyboxShader[0]->use();
-        data = stbi_load("resource/skybox/dustdn.jpg",&width, &height, &nrChannels,0);
+        data = stbi_load("resource/skybox/pm_dn.jpg",&width, &height, &nrChannels,0);
         if (data) {
             std::cout<< "load ok" << std::endl;
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -159,7 +159,7 @@ namespace GameClient {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         skyboxShader[0]->use();
-        data = stbi_load("resource/skybox/dustft.jpg",&width, &height, &nrChannels,0);
+        data = stbi_load("resource/skybox/pm_ft.jpg",&width, &height, &nrChannels,0);
         if (data) {
             std::cout<< "load ok" << std::endl;
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -177,7 +177,7 @@ namespace GameClient {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         skyboxShader[0]->use();
-        data = stbi_load("resource/skybox/dustbk.jpg",&width, &height, &nrChannels,0);
+        data = stbi_load("resource/skybox/pm_bk.jpg",&width, &height, &nrChannels,0);
         if (data) {
             std::cout<< "load ok" << std::endl;
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -195,7 +195,7 @@ namespace GameClient {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         skyboxShader[0]->use();
-        data = stbi_load("resource/skybox/dustlf.jpg",&width, &height, &nrChannels,0);
+        data = stbi_load("resource/skybox/pm_lf.jpg",&width, &height, &nrChannels,0);
         if (data) {
             std::cout<< "load ok" << std::endl;
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -213,7 +213,7 @@ namespace GameClient {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         skyboxShader[0]->use();
-        data = stbi_load("resource/skybox/dustrt.jpg",&width, &height, &nrChannels,0);
+        data = stbi_load("resource/skybox/pm_rt.jpg",&width, &height, &nrChannels,0);
         if (data) {
             std::cout<< "load ok" << std::endl;
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -231,7 +231,7 @@ namespace GameClient {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         skyboxShader[0]->use();
-        data = stbi_load("resource/skybox/dustup.jpg",&width, &height, &nrChannels,0);
+        data = stbi_load("resource/skybox/pm_up.jpg",&width, &height, &nrChannels,0);
         if (data) {
             std::cout<< "load ok" << std::endl;
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
