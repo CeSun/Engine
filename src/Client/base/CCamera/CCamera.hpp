@@ -24,7 +24,9 @@ namespace GameClient{
         void setYaw(float yaw);
         float getYaw();
         void setPosition(glm::vec3 position);
-
+        glm::vec3 getPosition() {
+            return position;
+        }
     protected:
     private:
     private:

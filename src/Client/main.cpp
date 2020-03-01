@@ -2,7 +2,7 @@
 // Created by ce.a.sun on 2019/12/18.
 //
 #include <iostream>
-#include "src/Client/CClient/CClient.hpp"
+#include <Client/CClient/CClient.hpp>
 
 
 int main(){

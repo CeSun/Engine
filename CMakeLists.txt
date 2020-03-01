@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 #头文件目录
 include_directories(${CMAKE_SOURCE_DIR}/include)
-include_directories(${CMAKE_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
 # 设置服务端相关的文件
 set (ServerFile
@@ -19,11 +19,12 @@ set (ServerFile
         src/Server/CServer/CServer.cpp)
 set (ClientFile
         # 客户端的文件添加到这里
-            src/Client/CClient/CClient.cpp
-            src/Client/CDemo/CDemo.cpp
-            src/Client/CShader/CShader.cpp
-            src/Client/CCamera/CCamera.cpp
-        )
+        src/Client/CClient/CClient.cpp
+        src/Client/base/CShader/CShader.cpp
+        src/Client/base/CCamera/CCamera.cpp
+        src/Client/base/CTexture/CTexture.cpp
+        src/Client/CWorld/CWorld.cpp
+        src/Client/base/CEntity/CEntity.cpp src/Client/base/CModel/CModel.cpp src/Client/base/CModel/CModel.hpp src/Client/CWorld/CEntityMgn/CEntityMgn.cpp src/Client/CWorld/CEntityMgn/CEntityMgn.hpp src/Client/base/CCube/CCube.cpp src/Client/base/CCube/CCube.hpp)
 IF (program STREQUAL Client)
     add_executable(Engine
         # 客户端入口
