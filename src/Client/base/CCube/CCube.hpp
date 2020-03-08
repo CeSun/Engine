@@ -5,17 +5,21 @@
 #ifndef ENGINE_CCUBE_HPP
 #define ENGINE_CCUBE_HPP
 
-#include <Client/base/CTexture/CTexture.hpp>
 #include <glm/glm.hpp>
-
+#include <memory>
 namespace GameClient {
+    class CTexture;
+    class CShader;
     class CCube {
     public:
-        CCube(const CTexture& texture, glm::vec3 postion, glm::vec3 size);
+        CCube(const CTexture& texture, glm::vec3 postion, glm::vec3 size,std::shared_ptr<CShader> shader);
         void draw();
     private:
-        float buffer [8 * (3 + 2)];
-        unsigned int Texture;
+        float buffer [24][3 + 2];
+        int eboBuffer[6] = { 0,1,2,2,3,0 };
+        unsigned int texture;
+        unsigned int vao[6],vbo[6],ebo[6];
+        std::shared_ptr<CShader> shader;
     };
 }
 

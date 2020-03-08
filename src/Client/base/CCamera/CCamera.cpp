@@ -4,7 +4,7 @@
 
 #include "CCamera.hpp"
 
-
+/*
 namespace GameClient {
 
     CCamera::CCamera(glm::vec3 position, float pitch,float yaw, glm::vec3 worldup) {
@@ -53,3 +53,4 @@ namespace GameClient {
     CCamera::~CCamera() {
     }
 }
+ */
