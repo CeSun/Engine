@@ -5,10 +5,11 @@
 #ifndef ENGINE_CTEXTURE_HPP
 #define ENGINE_CTEXTURE_HPP
 
+#include <string>
 namespace GameClient{
     class CTexture {
     public:
-        CTexture(const char* filename);
+        CTexture(std::string filename);
         ~CTexture();
         unsigned int getTextureId() const;
     private:

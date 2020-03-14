@@ -8,14 +8,18 @@
 #include "Client/base/CCube/CCube.hpp"
 #include <Client/base/CCamera/CCamera.hpp>
 #include <glm/glm.hpp>
+#include <Client/base/CSkyBox/CSkyBox.hpp>
 #include <memory>
 
-#define MAX_CUBUE 10
+#define MAX_CUBUE 100
+#define MAX_BOX 5
 namespace GameClient {
     std::shared_ptr<CShader> shader;
     std::shared_ptr<CTexture> texture;
     std::shared_ptr<CCube> cube[MAX_CUBUE];
+    std::shared_ptr<CCube> box[MAX_BOX];
     std::shared_ptr<CCamera> camera;
+    std::shared_ptr<CSkyBox> skybox;
     CClient::CClient() {
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
@@ -53,21 +57,20 @@ namespace GameClient {
         glEnable(GL_DEPTH_TEST);
 
         shader = std::make_shared<CShader>("resource/shader/cube.vs","resource/shader/cube.fs");
-        texture = std::make_shared<CTexture>("resource/container.jpg");
+        texture = std::make_shared<CTexture>("resource/TDtps0247.jpg");
+        skybox = std::make_shared<CSkyBox>("pm",shader);
 
-        cube[0] = std::make_shared<CCube>(*texture,glm::vec3(0.0,0.0,0.0),glm::vec3(10,10,10),shader);
-        cube[1] = std::make_shared<CCube>(*texture,glm::vec3(20.0,0.0,0.0),glm::vec3(10,10,10),shader);
-        cube[2] = std::make_shared<CCube>(*texture,glm::vec3(40.0,0.0,0.0),glm::vec3(10,10,10),shader);
-
-        cube[3] = std::make_shared<CCube>(*texture,glm::vec3(40.0,0.0,20.0),glm::vec3(10,10,10),shader);
-        cube[4] = std::make_shared<CCube>(*texture,glm::vec3(40.0,0.0,40.0),glm::vec3(10,10,10),shader);
-        cube[5] = std::make_shared<CCube>(*texture,glm::vec3(40.0,20.0,40.0),glm::vec3(10,10,10),shader);
-        cube[6] = std::make_shared<CCube>(*texture,glm::vec3(60.0,0.0,40.0),glm::vec3(10,10,10),shader);
-
-
+        for (int i = 0 ; i < MAX_CUBUE ; i ++ ) {
+            cube[i] = std::make_shared<CCube>(*texture,glm::vec3(0.0 + (i % 10) * 20 ,0.0,0.0 + (i / 10) * 20),glm::vec3(10,1,10),shader);
+        }
+        std::shared_ptr<CTexture> boxTexture = std::make_shared<CTexture>("resource/container.jpg");
+        box[0] = std::make_shared<CCube>(*boxTexture,glm::vec3(82.0,6.0,77.0),glm::vec3(5,5,5),shader);
+        box[1] = std::make_shared<CCube>(*boxTexture,glm::vec3(87.0,16.0,77.0),glm::vec3(5,5,5),shader);
+        box[2] = std::make_shared<CCube>(*boxTexture,glm::vec3(92.0,6.0,77.0),glm::vec3(5,5,5),shader);
         camera = std::make_shared<CCamera>(glm::vec3(100.0,100.0,40.0));
 
-        glm::mat4 projection = glm::perspective(glm::radians(camera->Zoom), (float)width / (float)height, 0.1f, 800.0f);
+
+        glm::mat4 projection = glm::perspective(glm::radians(camera->Zoom), (float)width / (float)height, 0.1f,  15000.0f);
         glm::mat4 view = camera->GetViewMatrix();
         shader->use();
         shader->setMat4("model",glm::mat4(1.0));
@@ -78,9 +81,16 @@ namespace GameClient {
 
     }
     void CClient::processInput() {
-        if(glfwGetKey(this->engineWindow, GLFW_KEY_ESCAPE)) {
+        if(glfwGetKey(this->engineWindow, GLFW_KEY_ESCAPE))
             glfwSetWindowShouldClose(this->engineWindow, GLFW_TRUE);
-        }
+        if (glfwGetKey(this->engineWindow, GLFW_KEY_W) == GLFW_PRESS)
+            camera->ProcessKeyboard(FORWARD, 0.05);
+        if (glfwGetKey(this->engineWindow, GLFW_KEY_S) == GLFW_PRESS)
+            camera->ProcessKeyboard(BACKWARD, 0.05);
+        if (glfwGetKey(this->engineWindow, GLFW_KEY_A) == GLFW_PRESS)
+            camera->ProcessKeyboard(LEFT, 0.05);
+        if (glfwGetKey(this->engineWindow, GLFW_KEY_D) == GLFW_PRESS)
+            camera->ProcessKeyboard(RIGHT, 0.05);
         //demo.inputKey();
     }
 
@@ -92,12 +102,16 @@ namespace GameClient {
         while(!glfwWindowShouldClose(this->engineWindow)) {
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+            skybox->draw();
             glm::mat4 view = camera->GetViewMatrix();
             shader->setMat4("view", view);
             for(int i = 0 ; i < MAX_CUBUE ; i ++) {
                 if(cube[i] != nullptr)
                     cube[i]->draw();
+            }
+            for(int i = 0 ; i < MAX_BOX ; i ++) {
+                if(box[i] != nullptr)
+                    box[i]->draw();
             }
             // 交换缓冲区
             glfwSwapBuffers(this->engineWindow);
@@ -107,7 +121,6 @@ namespace GameClient {
             this->processInput();
         }
     }
-
     void CClient::mouse_move(double xpos, double ypos) {
         static double lastx = 0, lasty = 0;
         static float offsetx = 0 , offsety =0;

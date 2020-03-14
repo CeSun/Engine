@@ -7,11 +7,12 @@
 #include <stb/stb_image.h>
 #include "CTexture.hpp"
 #include <iostream>
+#include <string>
 namespace GameClient {
-    CTexture::CTexture(const char *filename) {
+    CTexture::CTexture(std::string filename) {
         int nrChannels;
         stbi_set_flip_vertically_on_load(true);
-        unsigned char* data = stbi_load(filename,&width, &height, &nrChannels,0);
+        unsigned char* data = stbi_load(filename.c_str(),&width, &height, &nrChannels,0);
         if (data) {
             glGenTextures(1, &this->id);
             glBindTexture(GL_TEXTURE_2D, this->id);

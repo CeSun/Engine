@@ -24,7 +24,11 @@ set (ClientFile
         src/Client/base/CCamera/CCamera.cpp
         src/Client/base/CTexture/CTexture.cpp
         src/Client/CWorld/CWorld.cpp
-        src/Client/base/CEntity/CEntity.cpp src/Client/base/CModel/CModel.cpp src/Client/base/CModel/CModel.hpp src/Client/CWorld/CEntityMgn/CEntityMgn.cpp src/Client/CWorld/CEntityMgn/CEntityMgn.hpp src/Client/base/CCube/CCube.cpp src/Client/base/CCube/CCube.hpp)
+        src/Client/base/CEntity/CEntity.cpp
+        src/Client/base/CModel/CModel.cpp
+        src/Client/CWorld/CEntityMgn/CEntityMgn.cpp
+        src/Client/base/CCube/CCube.cpp
+        src/Client/base/CSkyBox/CSkyBox.cpp)
 IF (program STREQUAL Client)
     add_executable(Engine
         # 客户端入口
