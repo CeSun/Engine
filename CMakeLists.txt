@@ -26,9 +26,9 @@ set (ClientFile
         src/Client/CWorld/CWorld.cpp
         src/Client/base/CEntity/CEntity.cpp
         src/Client/base/CModel/CModel.cpp
-        src/Client/CWorld/CEntityMgn/CEntityMgn.cpp
         src/Client/base/CCube/CCube.cpp
-        src/Client/base/CSkyBox/CSkyBox.cpp)
+        src/Client/base/CSkyBox/CSkyBox.cpp
+        )
 IF (program STREQUAL Client)
     add_executable(Engine
         # 客户端入口
@@ -52,24 +52,43 @@ ENDIF()
 
 #跨平台的静态库配置
 IF (WIN32)
-    MESSAGE(STATUS "IS Windows System")
-    target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglad_x64.a)
-    target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglfw3_x64.a)
+    MESSAGE(STATUS "当前为Windows系统")
+    IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+        MESSAGE(STATUS "正在配置MSVC编译器的静态库")
+        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/msvc_static_lib/glad.lib)
+        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/msvc_static_lib/glfw3.lib)
+    ELSEIF(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU"))
+        MESSAGE(STATUS "正在配置GCC编译器的静态库")
+        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglad_x64.a)
+        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglfw3_x64.a)
+    ELSE()
+        MESSAGE(FATAL_ERROR  "${CMAKE_CXX_COMPILER_ID}编译器不支持")
+    ENDIF()
 ELSEIF(UNIX AND NOT APPLE)
-    #linux下需要以下依赖
-    #sudo apt-get install xorg-dev libglu1-mesa-dev
-    MESSAGE(STATUS "is like Unix")
-    target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/glad.a)
-    target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/libglfw3.a)
-    target_link_libraries(Engine GL m Xrandr Xi X11 Xxf86vm pthread dl Xinerama Xcursor)
+    IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+        MESSAGE(STATUS "正在配置GCC编译器的静态库")
+        #linux下需要以下依赖
+        #sudo apt-get install xorg-dev libglu1-mesa-dev
+        MESSAGE(STATUS "is like Unix")
+        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/glad.a)
+        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/libglfw3.a)
+        target_link_libraries(Engine GL m Xrandr Xi X11 Xxf86vm pthread dl Xinerama Xcursor)
+    ELSE()
+        MESSAGE(FATAL_ERROR  "${CMAKE_CXX_COMPILER_ID}编译器不支持")
+    ENDIF()
 ELSEIF(APPLE)
-    MESSAGE(STATUS "is OSX")
-    target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/mac_static_lib/libGLAD.a)
-    target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/mac_static_lib/libglfw3.a)
-    target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/Cocoa.framework )
-    target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/IOKit.framework )
-    target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/OpenGL.framework )
-    target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/CoreVideo.framework )
+    IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+        MESSAGE(STATUS "当前为MacOS系统")
+        MESSAGE(STATUS "正在配置GCC编译器的静态库")
+        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/mac_static_lib/libGLAD.a)
+        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/mac_static_lib/libglfw3.a)
+        target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/Cocoa.framework )
+        target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/IOKit.framework )
+        target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/OpenGL.framework )
+        target_link_libraries(Engine ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks/CoreVideo.framework )
+    ELSE()
+        MESSAGE(FATAL_ERROR  "${CMAKE_CXX_COMPILER_ID}编译器不支持")
+    ENDIF()
 ENDIF()
 MESSAGE(STATUS CMAKE_CURRRENT_BINARY_DIR)
 
