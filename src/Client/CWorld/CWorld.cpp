@@ -3,3 +3,13 @@
 //
 
 #include "CWorld.hpp"
+
+
+namespace GameClient {
+	void CWorld::draw() {
+
+	}
+	void CWorld::init() {
+
+	}
+}

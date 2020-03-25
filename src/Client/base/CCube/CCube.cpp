@@ -8,9 +8,8 @@
 #include <Client/base/CShader/CShader.hpp>
 #include <iostream>
 namespace GameClient {
-    CCube::CCube(const CTexture& texture, glm::vec3 postion, glm::vec3 size,std::shared_ptr<CShader> shader) {
-        this->shader = shader;
-        this->texture = texture.getTextureId();
+    CCube::CCube(const CTexture& texture, glm::vec3 postion, glm::vec3 size,const CShader& shader):
+        shader(shader), texture(texture){
         this -> buffer[0][0] = postion.x + size.x;
         this -> buffer[0][1] = postion.y - size.y;
         this -> buffer[0][2] = postion.z + size.z;
@@ -166,7 +165,6 @@ namespace GameClient {
         glGenVertexArrays(6, this->vao);
 
         for (int i = 0 ; i < 6 ; i++) {
-            std::cout <<  sizeof(this->eboBuffer) <<std::endl;
             glBindBuffer(GL_ARRAY_BUFFER, this->vbo[i]);
             glBufferData(GL_ARRAY_BUFFER, sizeof(this->buffer[i]) * 4 , this->buffer[i * 4] , GL_STATIC_DRAW);
             glBindVertexArray(this->vao[i]);
@@ -182,10 +180,9 @@ namespace GameClient {
     }
     void CCube::draw() {
         for (int i = 0 ; i < 6 ; i++) {
-
-            shader->use();
+            shader.use();
             glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, this->texture);
+            glBindTexture(GL_TEXTURE_2D, texture.get_id());
             glBindVertexArray(this->vao[i]);
             glBindBuffer(GL_ARRAY_BUFFER, this->vbo[i]);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo[i]);

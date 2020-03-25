@@ -7,6 +7,7 @@
 #include <Client/base/CShader/CShader.hpp>
 #include <glm/glm.hpp>
 #include <glad/glad.h>
+#include <Client/CClient/CClient.hpp>
 std::string vl[] = {
         "ft",
         "up",
@@ -16,16 +17,16 @@ std::string vl[] = {
         "lf"
 };
 namespace GameClient {
-    CSkyBox::CSkyBox(std::string skyboxname,std::shared_ptr<CShader> shader) {
+    CSkyBox::CSkyBox(const std::string& skyboxname, const CShader& shader):shader(shader) {
         for (int i = 0; i < 6 ; i ++ ) {
-            std::string filename("resource/skybox/");
+            std::string filename("resource/texture/skybox/");
             filename += skyboxname;
             filename += ("_" + vl[i]);
             filename += ".jpg";
-            CTexture tmp(filename);
-            texture.push_back(tmp);
+            const CTexture& texture = CClient::getIntance().get_texturemgr().add_texture(filename);
+
+            textureList.push_back(&texture);
         }
-        this->shader = shader;
         // 计算点
         glm::vec3 postion(0.0,0.0,0.0);
         glm::vec3 size(4096,4096,4096);
@@ -199,9 +200,9 @@ namespace GameClient {
     }
     void CSkyBox::draw() {
         for (int i = 0 ; i < 6 ; i++) {
-            shader->use();
+            shader.use();
             glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, this->texture[i].getTextureId());
+            glBindTexture(GL_TEXTURE_2D, this->textureList[i]->get_id());
             glBindVertexArray(this->vao[i]);
             glBindBuffer(GL_ARRAY_BUFFER, this->vbo[i]);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo[i]);

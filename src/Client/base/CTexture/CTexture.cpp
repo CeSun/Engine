@@ -9,7 +9,7 @@
 #include <iostream>
 #include <string>
 namespace GameClient {
-    CTexture::CTexture(std::string filename) {
+    CTexture::CTexture(const std::string& filename) {
         int nrChannels;
         stbi_set_flip_vertically_on_load(true);
         unsigned char* data = stbi_load(filename.c_str(),&width, &height, &nrChannels,0);
@@ -29,7 +29,7 @@ namespace GameClient {
     CTexture::~CTexture() {
 
     }
-    unsigned int CTexture::getTextureId() const {
+    unsigned int CTexture::get_id() const {
         return this->id;
     }
 }

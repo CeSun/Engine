@@ -9,9 +9,20 @@
 namespace GameClient{
     class CTexture {
     public:
-        CTexture(std::string filename);
+        CTexture(const std::string& filename);
         ~CTexture();
-        unsigned int getTextureId() const;
+
+        // 获取纹理OpenGl纹理id
+        unsigned int get_id() const;
+
+        // 获取纹理宽度
+        int get_width() const {
+            return width;
+        }
+        // 获取纹理高度
+        int get_height() const {
+            return height;
+        }
     private:
         unsigned int id;
         int height,width;

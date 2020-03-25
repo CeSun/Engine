@@ -10,7 +10,8 @@
 namespace GameClient {
     class CWorld {
     public:
-        void worldLoad();
+        void init();
+        void draw();
     private:
 
     };

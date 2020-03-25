@@ -14,8 +14,6 @@
 #define MAX_CUBUE 100
 #define MAX_BOX 5
 namespace GameClient {
-    std::shared_ptr<CShader> shader;
-    std::shared_ptr<CTexture> texture;
     std::shared_ptr<CCube> cube[MAX_CUBUE];
     std::shared_ptr<CCube> box[MAX_BOX];
     std::shared_ptr<CCamera> camera;
@@ -56,27 +54,28 @@ namespace GameClient {
         glCullFace(GL_BACK);
         glEnable(GL_DEPTH_TEST);
 
-        shader = std::make_shared<CShader>("resource/shader/cube.vs","resource/shader/cube.fs");
-        texture = std::make_shared<CTexture>("resource/TDtps0247.jpg");
-        skybox = std::make_shared<CSkyBox>("pm",shader);
+        const CShader& cubeShader = shadermgr.add_shader("resource/shader/cube.vs", "resource/shader/cube.fs");
+        const CShader& skyboxShader = shadermgr.add_shader("resource/shader/skybox/shader.vs", "resource/shader/skybox/shader.fs");
+        const CTexture& roTexture1 = texturemgr.add_texture("resource/texture/TDtps0247.jpg");
+        const CTexture& roTexture2 = texturemgr.add_texture("resource/texture/container.jpg");
+        skybox = std::make_shared<CSkyBox>("pm", skyboxShader);
 
         for (int i = 0 ; i < MAX_CUBUE ; i ++ ) {
-            cube[i] = std::make_shared<CCube>(*texture,glm::vec3(0.0 + (i % 10) * 20 ,0.0,0.0 + (i / 10) * 20),glm::vec3(10,1,10),shader);
+            cube[i] = std::make_shared<CCube>(roTexture1,glm::vec3(0.0 + (i % 10) * 20 ,0.0,0.0 + (i / 10) * 20),glm::vec3(10,1,10), cubeShader);
         }
-        std::shared_ptr<CTexture> boxTexture = std::make_shared<CTexture>("resource/container.jpg");
-        box[0] = std::make_shared<CCube>(*boxTexture,glm::vec3(82.0,6.0,77.0),glm::vec3(5,5,5),shader);
-        box[1] = std::make_shared<CCube>(*boxTexture,glm::vec3(87.0,16.0,77.0),glm::vec3(5,5,5),shader);
-        box[2] = std::make_shared<CCube>(*boxTexture,glm::vec3(92.0,6.0,77.0),glm::vec3(5,5,5),shader);
+        box[0] = std::make_shared<CCube>(roTexture2, glm::vec3(82.0,6.0,77.0),glm::vec3(5,5,5), cubeShader);
+        box[1] = std::make_shared<CCube>(roTexture2, glm::vec3(87.0,16.0,77.0),glm::vec3(5,5,5), cubeShader);
+        box[2] = std::make_shared<CCube>(roTexture2, glm::vec3(92.0,6.0,77.0),glm::vec3(5,5,5), cubeShader);
         camera = std::make_shared<CCamera>(glm::vec3(100.0,100.0,40.0));
 
 
         glm::mat4 projection = glm::perspective(glm::radians(camera->Zoom), (float)width / (float)height, 0.1f,  15000.0f);
         glm::mat4 view = camera->GetViewMatrix();
-        shader->use();
-        shader->setMat4("model",glm::mat4(1.0));
-        shader->setMat4("projection", projection);
-        shader->setMat4("view", view);
-        shader->setInt("texture1", 0);
+      
+        shadermgr.setMat4("model",glm::mat4(1.0));
+        shadermgr.setMat4("projection", projection);
+        shadermgr.setMat4("view", view);
+        shadermgr.setInt("texture1", 0);
         return 0;
 
     }
@@ -104,7 +103,7 @@ namespace GameClient {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             skybox->draw();
             glm::mat4 view = camera->GetViewMatrix();
-            shader->setMat4("view", view);
+            shadermgr.setMat4("view", view);
             for(int i = 0 ; i < MAX_CUBUE ; i ++) {
                 if(cube[i] != nullptr)
                     cube[i]->draw();
@@ -113,6 +112,7 @@ namespace GameClient {
                 if(box[i] != nullptr)
                     box[i]->draw();
             }
+            world.draw();
             // 交换缓冲区
             glfwSwapBuffers(this->engineWindow);
             // 监听输入

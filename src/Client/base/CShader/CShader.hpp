@@ -11,7 +11,7 @@
 namespace GameClient {
     class CShader {
     public:
-        CShader (const char* vertexPath, const char* fragmentPath);
+        CShader (const std::string& vertexPath, const std::string& fragmentPath);
         ~CShader();
         void use() const;
         void setBool(const std::string &name, bool value) const;

@@ -13,11 +13,11 @@ namespace GameClient {
     class CTexture;
     class CSkyBox {
     public:
-        CSkyBox(std::string skyboxname,std::shared_ptr<CShader> shader);
+        CSkyBox(const std::string& skyboxname,const CShader& shader);
         void draw();
     private:
-        std::shared_ptr<CShader> shader;
-        std::vector<CTexture> texture;
+        const CShader& shader;
+        std::vector<const CTexture*> textureList;
         unsigned int vao[6],vbo[6],ebo[6];
         float buffer [24][3 + 2];
         int eboBuffer[6] = { 0,3,2,2,1,0 };

@@ -15,7 +15,7 @@ namespace GameClient {
         PROGRAM
     };
     void checkCompileErrors(unsigned int id, CompileType type);
-    CShader::CShader(const char *vertexPath, const char *fragmentPath) {
+    CShader::CShader(const std::string& vertexPath, const std::string& fragmentPath) {
 
         std::ifstream vertexFile;
         std::ifstream fragmentFile;
@@ -24,7 +24,6 @@ namespace GameClient {
         std::stringstream vShaderStream,fShaderStream;
         std::string vShaderSource;
         std::string fShaderSource;
-
         try {
             vertexFile.open(vertexPath);
             fragmentFile.open(fragmentPath);

@@ -10,16 +10,17 @@
 namespace GameClient {
     class CTexture;
     class CShader;
+    class CTexture;
     class CCube {
     public:
-        CCube(const CTexture& texture, glm::vec3 postion, glm::vec3 size,std::shared_ptr<CShader> shader);
+        CCube(const CTexture& texture, glm::vec3 postion, glm::vec3 size, const CShader& shader);
         void draw();
     private:
         float buffer [24][3 + 2];
         int eboBuffer[6] = { 0,1,2,2,3,0 };
-        unsigned int texture;
         unsigned int vao[6],vbo[6],ebo[6];
-        std::shared_ptr<CShader> shader;
+        const CTexture& texture;
+        const CShader& shader;
     };
 }
 

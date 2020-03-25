@@ -28,6 +28,8 @@ set (ClientFile
         src/Client/base/CModel/CModel.cpp
         src/Client/base/CCube/CCube.cpp
         src/Client/base/CSkyBox/CSkyBox.cpp
+        src/Client/CShaderMgr/CShaderMgr.cpp
+        src/Client/CTextureMgr/CTextureMgr.cpp
         )
 IF (program STREQUAL Client)
     add_executable(Engine
@@ -49,7 +51,6 @@ ELSE()
     set_target_properties(Engine PROPERTIES OUTPUT_NAME "GameServer")
 
 ENDIF()
-
 #跨平台的静态库配置
 IF (WIN32)
     MESSAGE(STATUS "当前为Windows系统")
