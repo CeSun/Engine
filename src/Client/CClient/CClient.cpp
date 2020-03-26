@@ -10,6 +10,12 @@
 #include <glm/glm.hpp>
 #include <Client/base/CSkyBox/CSkyBox.hpp>
 #include <memory>
+// imgui
+#include <Client/libraries/imgui/imgui.h>
+#include <Client/libraries/imgui/imgui_impl_glfw.h>
+#include <Client/libraries/imgui/imgui_impl_opengl3.h>
+
+
 
 #define MAX_CUBUE 100
 #define MAX_BOX 5
@@ -30,6 +36,9 @@ namespace GameClient {
         #endif
     }
     CClient::~CClient() {
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
         glfwTerminate();
     }
 
@@ -97,7 +106,6 @@ namespace GameClient {
         // 初始化
         if(this->init())
             return;
-
         while(!glfwWindowShouldClose(this->engineWindow)) {
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -113,6 +121,7 @@ namespace GameClient {
                     box[i]->draw();
             }
             world.draw();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
             // 交换缓冲区
             glfwSwapBuffers(this->engineWindow);
             // 监听输入

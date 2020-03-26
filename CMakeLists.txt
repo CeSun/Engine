@@ -11,7 +11,6 @@ set(CMAKE_CXX_STANDARD 11)
 #头文件目录
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/src)
-
 # 设置服务端相关的文件
 set (ServerFile
         # 服务端的文件放到这里
@@ -32,11 +31,20 @@ set (ClientFile
         src/Client/CTextureMgr/CTextureMgr.cpp
         )
 IF (program STREQUAL Client)
+set (IMGUI 
+    src/Client/libraries/imgui/imgui.cpp
+    src/Client/libraries/imgui/imgui_impl_glfw.cpp
+    src/Client/libraries/imgui/imgui_impl_opengl3.cpp
+    src/Client/libraries/imgui/imgui_impl_opengl3.cpp
+    src/Client/libraries/imgui/imgui_draw.cpp
+    src/Client/libraries/imgui/imgui_widgets.cpp
+    )
     add_executable(Engine
         # 客户端入口
         src/Client/main.cpp
         ${ClientFile}
         ${ServerFile}
+        ${IMGUI}
         )
     #设置输出目录
     SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build/Client)

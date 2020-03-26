@@ -36,6 +36,8 @@ namespace GameClient {
         const static int minor = 3;
         const static int width = 1024;
         const static int height = 768;
+
+        bool is_show_mouse = true;
         friend void mouse_callback(GLFWwindow* window, double xpos, double ypos);
     public:
         // 获取着色器管理对象
