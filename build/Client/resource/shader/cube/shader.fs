@@ -8,7 +8,7 @@ uniform sampler2D texture1;
 
 void main()
 {
-    float ambientStrength = 1.0;                    // 环境光强度
+    float ambientStrength = 0.1;
     vec3 ambient = ambientStrength * vec3(1.0,1.0,1.0);
     FragColor = vec4(ambient, 1.0) * texture(texture1, TexCoord);
 }

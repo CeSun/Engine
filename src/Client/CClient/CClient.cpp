@@ -11,9 +11,6 @@
 #include <Client/base/CSkyBox/CSkyBox.hpp>
 #include <memory>
 // imgui
-#include <Client/libraries/imgui/imgui.h>
-#include <Client/libraries/imgui/imgui_impl_glfw.h>
-#include <Client/libraries/imgui/imgui_impl_opengl3.h>
 
 
 
@@ -36,9 +33,6 @@ namespace GameClient {
         #endif
     }
     CClient::~CClient() {
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplGlfw_Shutdown();
-        ImGui::DestroyContext();
         glfwTerminate();
     }
 
@@ -63,7 +57,7 @@ namespace GameClient {
         glCullFace(GL_BACK);
         glEnable(GL_DEPTH_TEST);
 
-        const CShader& cubeShader = shadermgr.add_shader("resource/shader/cube.vs", "resource/shader/cube.fs");
+        const CShader& cubeShader = shadermgr.add_shader("resource/shader/cube/shader.vs", "resource/shader/cube/shader.fs");
         const CShader& skyboxShader = shadermgr.add_shader("resource/shader/skybox/shader.vs", "resource/shader/skybox/shader.fs");
         const CTexture& roTexture1 = texturemgr.add_texture("resource/texture/TDtps0247.jpg");
         const CTexture& roTexture2 = texturemgr.add_texture("resource/texture/container.jpg");
@@ -121,7 +115,6 @@ namespace GameClient {
                     box[i]->draw();
             }
             world.draw();
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
             // 交换缓冲区
             glfwSwapBuffers(this->engineWindow);
             // 监听输入
