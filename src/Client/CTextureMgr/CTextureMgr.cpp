@@ -6,15 +6,22 @@
 #include <Client/base/CTexture/CTexture.hpp>
 
 namespace GameClient {
-	const CTexture& CTextureMgr::add_texture(const std::string& filename) {
+	std::shared_ptr<const CTexture> CTextureMgr::add_texture(const std::string& filename) {
 		auto iter = texturemap.find(filename);
 		if (iter == texturemap.end()) {
 			// map里没有那就加载纹理
 			std::shared_ptr<CTexture> poTexture = std::make_shared<CTexture>(filename);
-			// 插入map
-			texturemap[filename] = poTexture;
+			if (poTexture == nullptr) {
+				return nullptr;
+			} else {
+				// 插入map
+				texturemap[filename] = poTexture;
+				return poTexture;
+			}
 		}
-		// map里有，那就直接返回
-		return *(texturemap[filename]);
+		else {
+			// map里有，那就直接返回
+			return texturemap[filename];
+		}
 	}
 }

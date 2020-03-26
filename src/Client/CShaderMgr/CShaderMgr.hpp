@@ -7,8 +7,10 @@
 
 #include <glm/glm.hpp>
 #include <string>
-#include <vector>
+#include <map>
 #include <memory>
+#include <Client/base/CShader/CShader.hpp>
+
 // 着色器管理对象
 namespace GameClient {
     class CShader;
@@ -19,12 +21,20 @@ namespace GameClient {
         // 析构函数
         ~CShaderMgr();
         // 添加着色器
-        const CShader& add_shader(const std::string& vsname, const std::string& fsname);
-        // 使用着色器
-        void useShader(int shaderId) const;
+        std::shared_ptr<const CShader> add_shader(const std::string& vsname, const std::string& fsname);
 
     private:
-        std::vector<std::shared_ptr<CShader>> shaderlist;
+        struct SShaderPath {
+            std::string vs;
+            std::string fs;
+            bool operator < (const SShaderPath& a) const {
+                return this->vs < a.vs;
+            }
+            bool operator > (const SShaderPath& a) const {
+                return this->vs > a.vs;
+            }
+        };
+        std::map<SShaderPath, std::shared_ptr<CShader>> shaderMap;
     public:
         void setBool(const std::string& name, bool value) const;
         void setInt(const std::string& name, int value) const;

@@ -10,91 +10,95 @@ namespace GameClient {
     CShaderMgr::CShaderMgr() {}
 
     CShaderMgr::~CShaderMgr() {
-        for (auto iter : shaderlist) {
-        }
     }
 
-    const CShader& CShaderMgr::add_shader(const std::string& vsname, const std::string& fsname) {
-        std::shared_ptr<CShader> shader = std::make_shared<CShader>(vsname, fsname);
-        if (shader != nullptr) {
-            this->shaderlist.push_back(shader);
-            return *shader;
+    std::shared_ptr<const CShader> CShaderMgr::add_shader(const std::string& vsname, const std::string& fsname) {
+        SShaderPath key;
+        key.vs = vsname;
+        key.fs = fsname;
+        auto iter = shaderMap.find(key);
+        if (iter == shaderMap.end()) {
+            std::shared_ptr<CShader> shader = std::make_shared<CShader>(vsname, fsname);
+            if (shader != nullptr) {
+                this->shaderMap[key] = shader;
+                return shader;
+            }
+            return nullptr;
         }
-        return *shader;
-    }
-    void CShaderMgr::useShader(int shaderId) const {
-        this->shaderlist[shaderId]->use();
+        else {
+            return iter->second;
+        }
     }
     void CShaderMgr::setBool(const std::string& name, bool value) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setBool(name, value);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setBool(name, value);
         }
     }
     void CShaderMgr::setInt(const std::string& name, int value) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setInt(name, value);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setInt(name, value);
         }
     }
     void CShaderMgr::setFloat(const std::string& name, float value) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setFloat(name, value);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setFloat(name, value);
         }
     }
     void CShaderMgr::setVec2(const std::string& name, const glm::vec2& value) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setVec2(name, value);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setVec2(name, value);
         }
     }
     void CShaderMgr::setVec2(const std::string& name, float x, float y) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setVec2(name, x, y);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setVec2(name, x, y);
         }
     }
     void CShaderMgr::setVec3(const std::string& name, const glm::vec3& value) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setVec3(name, value);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setVec3(name, value);
         }
     }
     void CShaderMgr::setVec3(const std::string& name, float x, float y, float z) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setVec3(name, x, y, z);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setVec3(name, x, y, z);
         }
     }
     void CShaderMgr::setVec4(const std::string& name, const glm::vec4& value) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setVec4(name, value);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setVec4(name, value);
         }
     }
     void CShaderMgr::setVec4(const std::string& name, float x, float y, float z, float w) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setVec4(name, x, y, z, w);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setVec4(name, x, y, z, w);
         }
     }
     void CShaderMgr::setMat2(const std::string& name, const glm::mat2& mat) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setMat2(name, mat);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setMat2(name, mat);
         }
     }
     void CShaderMgr::setMat3(const std::string& name, const glm::mat3& mat) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setMat3(name, mat);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setMat3(name, mat);
         }
     }
     void CShaderMgr::setMat4(const std::string& name, const glm::mat4& mat) const {
-        for (auto iter : shaderlist) {
-            iter->use();
-            iter->setMat4(name, mat);
+        for (auto iter : shaderMap) {
+            iter.second->use();
+            iter.second->setMat4(name, mat);
         }
     }
 }

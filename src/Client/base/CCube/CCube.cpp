@@ -2,14 +2,16 @@
 // Created by 孙策 on 2020/3/1.
 //
 
-#include <Client/base/CTexture/CTexture.hpp>
-#include <glad/glad.h>
-#include "CCube.hpp"
-#include <Client/base/CShader/CShader.hpp>
 #include <iostream>
+#include <glad/glad.h>
+#include <Client/base/CShader/CShader.hpp>
+#include <Client/base/CTexture/CTexture.hpp>
+#include <Client/CClient/CClient.hpp>
+
+#include "CCube.hpp"
 namespace GameClient {
-    CCube::CCube(const CTexture& texture, glm::vec3 postion, glm::vec3 size,const CShader& shader):
-        shader(shader), texture(texture){
+    CCube::CCube(const CTexture& texture, glm::vec3 postion, glm::vec3 size):texture(texture) {
+        shader = CClient::getIntance().get_shadermgr().add_shader("resource/shader/cube/shader.vs", "resource/shader/cube/shader.fs");
         this -> buffer[0][0] = postion.x + size.x;
         this -> buffer[0][1] = postion.y - size.y;
         this -> buffer[0][2] = postion.z + size.z;
@@ -180,7 +182,8 @@ namespace GameClient {
     }
     void CCube::draw() {
         for (int i = 0 ; i < 6 ; i++) {
-            shader.use();
+            if (shader != nullptr)
+                shader->use();
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, texture.get_id());
             glBindVertexArray(this->vao[i]);

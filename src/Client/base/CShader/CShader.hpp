@@ -7,6 +7,7 @@
 
 #include <glm/glm.hpp>
 #include <string>
+#include <memory>
 #include <Client/base/CTexture/CTexture.hpp>
 namespace GameClient {
     class CShader {

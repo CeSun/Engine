@@ -7,14 +7,14 @@
 #include <map>
 #include <string>
 #include <memory>
+#include <Client/base/CTexture/CTexture.hpp>
 
 namespace GameClient {
-	class CTexture;
 	class CTextureMgr {
 	public:
 		CTextureMgr() {}
 		~CTextureMgr() {}
-		const CTexture& add_texture(const std::string& filename);
+		std::shared_ptr<const CTexture> add_texture(const std::string& filename);
 	private:
 		std::map<std::string, std::shared_ptr<CTexture>> texturemap;
 	};

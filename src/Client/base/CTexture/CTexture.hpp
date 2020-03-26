@@ -6,6 +6,8 @@
 #define ENGINE_CTEXTURE_HPP
 
 #include <string>
+#include <memory>
+
 namespace GameClient{
     class CTexture {
     public:
