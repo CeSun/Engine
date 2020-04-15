@@ -10,6 +10,10 @@
 #include <memory>
 #include <Client/base/CTexture/CTexture.hpp>
 namespace GameClient {
+    enum CompileType {
+        SHADER,
+        PROGRAM
+    };
     class CShader {
     public:
         CShader (const std::string& vertexPath, const std::string& fragmentPath);
@@ -27,8 +31,10 @@ namespace GameClient {
         void setMat2(const std::string &name, const glm::mat2 &mat) const;
         void setMat3(const std::string &name, const glm::mat3 &mat) const;
         void setMat4(const std::string &name, const glm::mat4 &mat) const;
+    public:
     private:
         unsigned ID;
     };
+    static void checkCompileErrors(unsigned int id, CompileType type);
 }
 #endif //ENGINE_CSHADER_HPP

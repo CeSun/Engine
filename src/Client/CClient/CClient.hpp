@@ -10,12 +10,13 @@
 #include <Client/CShaderMgr/CShaderMgr.hpp>
 #include <Client/CWorld/CWorld.hpp>
 #include <Client/CTextureMgr/CTextureMgr.hpp>
+#include <Client/CLightMgr/CLightMgr.hpp>
 namespace GameClient {
     class CCamera;
     class CClient {
     public:
         // 单例
-        static CClient& getIntance();
+        static CClient& intance();
         // 析构函数
         virtual ~CClient();
         // 执行游戏
@@ -36,7 +37,6 @@ namespace GameClient {
         const static int minor = 3;
         const static int width = 1024;
         const static int height = 768;
-
         bool is_show_mouse = true;
         friend void mouse_callback(GLFWwindow* window, double xpos, double ypos);
     public:
@@ -53,11 +53,15 @@ namespace GameClient {
         CShaderMgr shadermgr;
         // 纹理管理对象
         CTextureMgr texturemgr;
+        // 光源管理对象
+        CLightMgr lightMgr;
         // 世界对象
         CWorld world;
     };
 
     void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+
+
 }
 
 #endif //ENGINE_CCLIENT_HPP

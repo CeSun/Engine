@@ -14,30 +14,30 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 # 设置服务端相关的文件
 set (ServerFile
         # 服务端的文件放到这里
-        src/Server/CMessage/CMessage.cpp
-        src/Server/CServer/CServer.cpp)
+        "src/Server/CMessage/CMessage.cpp"
+        "src/Server/CServer/CServer.cpp" )
 set (ClientFile
         # 客户端的文件添加到这里
-        src/Client/CClient/CClient.cpp
-        src/Client/base/CShader/CShader.cpp
-        src/Client/base/CCamera/CCamera.cpp
-        src/Client/base/CTexture/CTexture.cpp
-        src/Client/CWorld/CWorld.cpp
-        src/Client/base/CEntity/CEntity.cpp
-        src/Client/base/CModel/CModel.cpp
-        src/Client/base/CCube/CCube.cpp
-        src/Client/base/CSkyBox/CSkyBox.cpp
-        src/Client/CShaderMgr/CShaderMgr.cpp
-        src/Client/CTextureMgr/CTextureMgr.cpp
-        )
+        "src/Client/CClient/CClient.cpp"
+        "src/Client/base/CShader/CShader.cpp"
+        "src/Client/base/CCamera/CCamera.cpp"
+        "src/Client/base/CTexture/CTexture.cpp"
+        "src/Client/CWorld/CWorld.cpp"
+        "src/Client/base/CEntity/CEntity.cpp"
+        "src/Client/base/CModel/CModel.cpp"
+        "src/Client/base/CCube/CCube.cpp"
+        "src/Client/base/CSkyBox/CSkyBox.cpp"
+        "src/Client/CShaderMgr/CShaderMgr.cpp"
+        "src/Client/CTextureMgr/CTextureMgr.cpp"
+        "src/Client/base/CLight/CLight.cpp" "src/Client/CLightMgr/CLightMgr.cpp")
 IF (program STREQUAL Client)
 set (IMGUI 
-    src/Client/libraries/imgui/imgui.cpp
-    src/Client/libraries/imgui/imgui_impl_glfw.cpp
-    src/Client/libraries/imgui/imgui_impl_opengl3.cpp
-    src/Client/libraries/imgui/imgui_impl_opengl3.cpp
-    src/Client/libraries/imgui/imgui_draw.cpp
-    src/Client/libraries/imgui/imgui_widgets.cpp
+    "src/Client/libraries/imgui/imgui.cpp"
+    "src/Client/libraries/imgui/imgui_impl_glfw.cpp"
+    "src/Client/libraries/imgui/imgui_impl_opengl3.cpp"
+    "src/Client/libraries/imgui/imgui_impl_opengl3.cpp"
+    "src/Client/libraries/imgui/imgui_draw.cpp"
+    "src/Client/libraries/imgui/imgui_widgets.cpp"
     )
     add_executable(Engine
         # 客户端入口
@@ -59,17 +59,33 @@ ELSE()
     set_target_properties(Engine PROPERTIES OUTPUT_NAME "GameServer")
 
 ENDIF()
+
+
+set(MSVC_LIB 
+    "${PROJECT_SOURCE_DIR}/lib/msvc_static_lib/glad.lib"
+    "${PROJECT_SOURCE_DIR}/lib/msvc_static_lib/glfw3.lib"
+    "${PROJECT_SOURCE_DIR}/lib/msvc_static_lib/assimp.lib"
+)
+
+set (MINGW_LIB
+    "${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglad_x64.a"
+    "${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglfw3_x64.a"
+)
+
+set (GCC_LIB
+    "${PROJECT_SOURCE_DIR}/lib/linux_static_lib/glad.a"
+    "${PROJECT_SOURCE_DIR}/lib/linux_static_lib/libglfw3.a"
+    "GL m Xrandr Xi X11 Xxf86vm pthread dl Xinerama Xcursor"
+)
 #跨平台的静态库配置
 IF (WIN32)
     MESSAGE(STATUS "当前为Windows系统")
     IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
         MESSAGE(STATUS "正在配置MSVC编译器的静态库")
-        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/msvc_static_lib/glad.lib)
-        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/msvc_static_lib/glfw3.lib)
+        target_link_libraries(Engine ${MSVC_LIB})
     ELSEIF(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU"))
         MESSAGE(STATUS "正在配置GCC编译器的静态库")
-        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglad_x64.a)
-        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/win_static_lib/libglfw3_x64.a)
+        target_link_libraries(Engine ${MINGW_LIB})
     ELSE()
         MESSAGE(FATAL_ERROR  "${CMAKE_CXX_COMPILER_ID}编译器不支持")
     ENDIF()
@@ -79,9 +95,7 @@ ELSEIF(UNIX AND NOT APPLE)
         #linux下需要以下依赖
         #sudo apt-get install xorg-dev libglu1-mesa-dev
         MESSAGE(STATUS "is like Unix")
-        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/glad.a)
-        target_link_libraries(Engine ${PROJECT_SOURCE_DIR}/lib/linux_static_lib/libglfw3.a)
-        target_link_libraries(Engine GL m Xrandr Xi X11 Xxf86vm pthread dl Xinerama Xcursor)
+        target_link_libraries(Engine ${GCC_LIB})
     ELSE()
         MESSAGE(FATAL_ERROR  "${CMAKE_CXX_COMPILER_ID}编译器不支持")
     ENDIF()
@@ -100,5 +114,4 @@ ELSEIF(APPLE)
     ENDIF()
 ENDIF()
 MESSAGE(STATUS CMAKE_CURRRENT_BINARY_DIR)
-
 

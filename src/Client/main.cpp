@@ -10,7 +10,7 @@ int main(){
     using namespace GameClient;
 
     cout << "Game Start" << endl;
-    CClient& client = CClient::getIntance();
+    CClient& client = CClient::intance();
     client.run();
     cout << "Game End" << endl;
     return 0;

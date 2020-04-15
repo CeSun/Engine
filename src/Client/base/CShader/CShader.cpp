@@ -10,11 +10,6 @@
 #include "CShader.hpp"
 
 namespace GameClient {
-    enum CompileType {
-        SHADER,
-        PROGRAM
-    };
-    void checkCompileErrors(unsigned int id, CompileType type);
     CShader::CShader(const std::string& vertexPath, const std::string& fragmentPath) {
 
         std::ifstream vertexFile;
@@ -44,11 +39,13 @@ namespace GameClient {
         vertexShader = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertexShader, 1, &vShaderCode, nullptr);
         glCompileShader(vertexShader);
+        std::cout << vertexPath << std::endl;
         checkCompileErrors(vertexShader, CompileType::SHADER);
 
         fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fragmentShader, 1, &fShaderCode, nullptr);
         glCompileShader(fragmentShader);
+        std::cout << fragmentPath << std::endl;
         checkCompileErrors(fragmentShader, CompileType::SHADER);
 
         this->ID = glCreateProgram();
