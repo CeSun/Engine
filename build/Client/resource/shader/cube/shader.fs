@@ -25,7 +25,9 @@ in vec3 Normal;
 in vec3 FragPos;  
   
 // 纹理
-uniform sampler2D texture1;
+uniform sampler2D texture_diffuse1;
+uniform sampler2D texture_specular1;
+uniform sampler2D texture_normal1;
 // 摄像机坐标
 uniform vec3 viewPos; 
 // 光照参数
@@ -90,8 +92,8 @@ vec3 CalcSpotLight(LightParam lightp)
     if(theta > lightp.cutOff) // remember that we're working with angles as cosines instead of degrees so a '>' is used.
     {    
         // 环境光
-        float ambientStrength = 0.1;
-        vec3 ambient = ambientStrength * lightp.color;
+        //float ambientStrength = 0.1;
+        //vec3 ambient = ambientStrength * lightp.color;
         
         // diffuse 
         vec3 norm = normalize(Normal);
@@ -114,7 +116,7 @@ vec3 CalcSpotLight(LightParam lightp)
         float attenuation = 1.0 / (lightp.constant + lightp.linear * distance + lightp.quadratic * (distance * distance));    
 
    
-        vec3 result = ambient + diffuse + specular;
+        vec3 result = diffuse + specular;
         return result;
     }
     else 
@@ -127,6 +129,7 @@ vec3 CalcSpotLight(LightParam lightp)
 
 void main()
 {
+
     vec3 result = vec3(0.0);
     for (int i = 0; i < lightNum; i++) {
         if (lightParam[i].lighttype == 1) {
@@ -142,5 +145,5 @@ void main()
         }
  
     }
-    FragColor = vec4(result,1.0) * texture(texture1, TexCoord);
+    FragColor = vec4(result,1.0) * texture(texture_diffuse1, TexCoord);
 }

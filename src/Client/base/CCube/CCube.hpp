@@ -21,6 +21,7 @@ namespace GameClient {
         unsigned int vao[6],vbo[6],ebo[6];
         const CTexture& texture;
         std::shared_ptr<const CShader> shader;
+        glm::mat4 model;
     };
 }
 

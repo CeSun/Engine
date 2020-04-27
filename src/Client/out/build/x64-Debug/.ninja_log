@@ -1,0 +1,23 @@
+# ninja log v5
+79	204	608924160	CMakeFiles/Client.dir/base/CEntity/CEntity.cpp.obj	e1acf8c2439f980d
+31	545	608924161	CMakeFiles/Client.dir/CWorld/CWorld.cpp.obj	eeb013446c195fb0
+22	1224	608924161	CMakeFiles/Client.dir/base/CCamera/CCamera.cpp.obj	d5f99d0ba09b6948
+51	1486	608924162	CMakeFiles/Client.dir/base/CTexture/CTexture.cpp.obj	60f8e60fddba34e0
+70	1673	608924162	CMakeFiles/Client.dir/CShaderMgr/CShaderMgr.cpp.obj	dd8a97e0e1284be9
+60	1735	608924162	CMakeFiles/Client.dir/base/CSkyBox/CSkyBox.cpp.obj	5e3ceccc45e71fac
+13	1934	608924162	CMakeFiles/Client.dir/main.cpp.obj	956154294a3a10a3
+41	1951	608924162	CMakeFiles/Client.dir/base/CShader/CShader.cpp.obj	2d4c625a33cff743
+205	2206	608924162	CMakeFiles/Client.dir/base/CCube/CCube.cpp.obj	6dc7cba004d8395e
+546	2260	608924162	CMakeFiles/Client.dir/base/CLight/CLight.cpp.obj	7393dbdebbe64daf
+88	2317	608924162	CMakeFiles/Client.dir/base/CModel/CModel.cpp.obj	108e7e626038c0af
+1487	2477	608924163	CMakeFiles/Client.dir/CTextureMgr/CTextureMgr.cpp.obj	18485a704fd7f2b6
+1744	2724	608924163	CMakeFiles/Client.dir/libraries/imgui/imgui_draw.cpp.obj	3b086bbcd9de21be
+2286	2759	608924163	CMakeFiles/Client.dir/libraries/imgui/imgui_impl_opengl3.cpp.obj	19970f9d1abc6f5c
+2215	2902	608924163	CMakeFiles/Client.dir/libraries/imgui/imgui_widgets.cpp.obj	93571f5494109282
+1226	2981	608924163	CMakeFiles/Client.dir/base/CModel/CMesh/CMesh.cpp.obj	bfd75f5aa10dd462
+1937	3412	608924164	CMakeFiles/Client.dir/libraries/imgui/imgui_impl_glfw.cpp.obj	6f90715c32934ba3
+1675	3484	608924164	CMakeFiles/Client.dir/CLightMgr/CLightMgr.cpp.obj	20f2dc3c97dc205d
+1953	3516	608924164	CMakeFiles/Client.dir/libraries/imgui/imgui.cpp.obj	c12e80594162a45d
+36	1015	608924364	CMakeFiles/Client.dir/base/CModel/CMesh/CMesh.cpp.obj	bfd75f5aa10dd462
+16	1177	608924364	CMakeFiles/Client.dir/base/CShader/CShader.cpp.obj	2d4c625a33cff743
+24	1385	608924364	CMakeFiles/Client.dir/base/CModel/CModel.cpp.obj	108e7e626038c0af

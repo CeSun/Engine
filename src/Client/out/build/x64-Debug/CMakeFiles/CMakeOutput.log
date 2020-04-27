@@ -1,0 +1,56 @@
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: C:/VisualStudio/Community/VC/Tools/MSVC/14.25.28610/bin/HostX64/x64/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.25.28614 版
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+CMakeCXXCompilerId.cpp
+Microsoft (R) Incremental Linker Version 14.25.28614.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCXXCompilerId.exe 
+CMakeCXXCompilerId.obj 
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.exe"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
+
+The CXX compiler identification is MSVC, found in "C:/Users/SunCe/source/repos/CeSun/Engine/src/Client/out/build/x64-Debug/CMakeFiles/3.16.19112601-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: C:/Users/SunCe/source/repos/CeSun/Engine/src/Client/out/build/x64-Debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:\VISUALSTUDIO\COMMUNITY\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\CMAKE\Ninja\ninja.exe cmTC_365af && [1/2] Building C object CMakeFiles\cmTC_365af.dir\testCCompiler.c.obj
+[2/2] Linking C executable cmTC_365af.exe
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: C:/Users/SunCe/source/repos/CeSun/Engine/src/Client/out/build/x64-Debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:\VISUALSTUDIO\COMMUNITY\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\CMAKE\Ninja\ninja.exe cmTC_48635 && [1/2] Building C object CMakeFiles\cmTC_48635.dir\CMakeCCompilerABI.c.obj
+[2/2] Linking C executable cmTC_48635.exe
+
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: C:/Users/SunCe/source/repos/CeSun/Engine/src/Client/out/build/x64-Debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:\VISUALSTUDIO\COMMUNITY\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\CMAKE\Ninja\ninja.exe cmTC_19cc0 && [1/2] Building CXX object CMakeFiles\cmTC_19cc0.dir\testCXXCompiler.cxx.obj
+[2/2] Linking CXX executable cmTC_19cc0.exe
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: C:/Users/SunCe/source/repos/CeSun/Engine/src/Client/out/build/x64-Debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:\VISUALSTUDIO\COMMUNITY\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\CMAKE\Ninja\ninja.exe cmTC_e11d7 && [1/2] Building CXX object CMakeFiles\cmTC_e11d7.dir\CMakeCXXCompilerABI.cpp.obj
+[2/2] Linking CXX executable cmTC_e11d7.exe
+
+
+

@@ -1,17 +1,17 @@
 //
 // Created by ce.a.sun on 2019/12/18.
 //
-#include <iostream>
-#include <Client/CClient/CClient.hpp>
 
+#include <Client/CClient/CClient.hpp>
+#include <Common/CLog/CLog.hpp>
 
 int main(){
-    using namespace std;
+
     using namespace GameClient;
 
-    cout << "Game Start" << endl;
+    APP_LOG_INFO("Game Start");
     CClient& client = CClient::intance();
     client.run();
-    cout << "Game End" << endl;
+    APP_LOG_INFO("Game End");
     return 0;
 }

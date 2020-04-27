@@ -13,6 +13,7 @@ namespace GameClient {
         int nrChannels;
         stbi_set_flip_vertically_on_load(true);
         unsigned char* data = stbi_load(filename.c_str(),&width, &height, &nrChannels,0);
+        // std::cout << nrChannels << std::endl;
         if (data) {
             glGenTextures(1, &this->id);
             glBindTexture(GL_TEXTURE_2D, this->id);
@@ -20,7 +21,19 @@ namespace GameClient {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            GLenum format;
+            switch (nrChannels) {
+            case 3:
+                format = GL_RGB;
+                break;
+            case 4:
+                format = GL_RGBA;
+                break;
+            default:
+                format = GL_RGB;
+                break;
+            }
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, format, GL_UNSIGNED_BYTE, data);
             stbi_image_free(data);
         } else {
             std::cout << "load " <<filename << "faild" <<std::endl;

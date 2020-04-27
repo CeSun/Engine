@@ -8,11 +8,15 @@
 #include <Client/base/CTexture/CTexture.hpp>
 #include <Client/CClient/CClient.hpp>
 #include "CCube.hpp"
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace GameClient {
     CCube::CCube(const CTexture& texture, glm::vec3 postion, glm::vec3 size):texture(texture) {
         shader = CClient::intance().get_shadermgr().add_shader("resource/shader/cube/shader.vs", "resource/shader/cube/shader.fs");
+        model = glm::mat4(1.0);
+        model = glm::translate(model, postion);
 
+        postion = glm::vec3(0.0);
         this -> buffer[0][0] = postion.x + size.x;
         this -> buffer[0][1] = postion.y - size.y;
         this -> buffer[0][2] = postion.z + size.z;
@@ -199,6 +203,8 @@ namespace GameClient {
 
     }
     void CCube::draw() {
+
+        CClient::intance().get_shadermgr().setMat4("model", model);
         for (int i = 0 ; i < 6 ; i++) {
             if (shader != nullptr)
                 shader->use();

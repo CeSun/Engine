@@ -109,6 +109,9 @@ namespace GameClient {
     {
         glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
+    void CShader::setUinform1i(const std::string& name, GLint index) const {
+        glUniform1i(glGetUniformLocation(ID, name.c_str()), index);
+    }
     CShader::~CShader() {
         glDeleteProgram(this->ID);
     }

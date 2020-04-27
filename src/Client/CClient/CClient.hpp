@@ -11,8 +11,9 @@
 #include <Client/CWorld/CWorld.hpp>
 #include <Client/CTextureMgr/CTextureMgr.hpp>
 #include <Client/CLightMgr/CLightMgr.hpp>
+#include <Client/base/CCamera/CCamera.hpp>
+
 namespace GameClient {
-    class CCamera;
     class CClient {
     public:
         // 单例
@@ -38,7 +39,7 @@ namespace GameClient {
         const static int width = 1024;
         const static int height = 768;
         bool is_show_mouse = true;
-        friend void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+        static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
     public:
         // 获取着色器管理对象
         CShaderMgr& get_shadermgr() {
@@ -58,9 +59,6 @@ namespace GameClient {
         // 世界对象
         CWorld world;
     };
-
-    void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-
 
 }
 

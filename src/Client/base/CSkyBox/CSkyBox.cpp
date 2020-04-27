@@ -199,6 +199,7 @@ namespace GameClient {
 
     }
     void CSkyBox::draw() {
+        CClient::intance().get_shadermgr().setMat4("model", glm::mat4(1.0));
         for (int i = 0 ; i < 6 ; i++) {
             shader->use();
             glActiveTexture(GL_TEXTURE0);

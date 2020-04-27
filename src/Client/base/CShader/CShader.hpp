@@ -9,6 +9,7 @@
 #include <string>
 #include <memory>
 #include <Client/base/CTexture/CTexture.hpp>
+#include <glad\glad.h>
 namespace GameClient {
     enum CompileType {
         SHADER,
@@ -31,6 +32,7 @@ namespace GameClient {
         void setMat2(const std::string &name, const glm::mat2 &mat) const;
         void setMat3(const std::string &name, const glm::mat3 &mat) const;
         void setMat4(const std::string &name, const glm::mat4 &mat) const;
+        void setUinform1i(const std::string& name, GLint index) const;
     public:
     private:
         unsigned ID;
