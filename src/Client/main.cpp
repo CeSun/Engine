@@ -10,7 +10,7 @@ int main(){
     using namespace GameClient;
 
     APP_LOG_INFO("Game Start");
-    CClient& client = CClient::intance();
+    CClient& client = CClient::instance();
     client.run();
     APP_LOG_INFO("Game End");
     return 0;

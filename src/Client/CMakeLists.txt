@@ -30,7 +30,8 @@ set (ClientFile
     "base/CLight/CLight.cpp"
     "CLightMgr/CLightMgr.cpp"
     "base/CModel/CMesh/CMesh.cpp"
-    )
+    "../Common/CLog/Clog.cpp"
+     "base/CHlModel/CHlModel.cpp" "CPage/CPage.cpp")
 ## Imgui±àÒëÎÄ¼þ
 set (ImguiFile 
     "libraries/imgui/imgui.cpp"

@@ -12,7 +12,7 @@
 
 namespace GameClient {
     CCube::CCube(const CTexture& texture, glm::vec3 postion, glm::vec3 size):texture(texture) {
-        shader = CClient::intance().get_shadermgr().add_shader("resource/shader/cube/shader.vs", "resource/shader/cube/shader.fs");
+        shader = CClient::instance().get_shadermgr().add_shader("resource/shader/cube/shader.vs", "resource/shader/cube/shader.fs");
         model = glm::mat4(1.0);
         model = glm::translate(model, postion);
 
@@ -204,7 +204,7 @@ namespace GameClient {
     }
     void CCube::draw() {
 
-        CClient::intance().get_shadermgr().setMat4("model", model);
+        CClient::instance().get_shadermgr().setMat4("model", model);
         for (int i = 0 ; i < 6 ; i++) {
             if (shader != nullptr)
                 shader->use();

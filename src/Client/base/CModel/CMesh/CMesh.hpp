@@ -24,9 +24,7 @@ namespace GameClient {
 		// 绘制模型
 		void Draw(std::shared_ptr<const CShader> shader);
 	private:
-		// 绘制用的各个对象
-		unsigned int VAO, VBO, EBO;
-		// 初始化函数
+		// 上传顶点信息到显卡
 		void SetUpMesh();
 	public:
 		// 顶点数据
@@ -35,6 +33,9 @@ namespace GameClient {
 		std::vector<unsigned int> indices;
 		// 纹理数据
 		std::vector<Texture> textures;
+	private:
+		// 绘制用的各个对象
+		unsigned int VAO, VBO, EBO;
 	};
 }
 #endif // !__CMESH_HPP__

@@ -2,12 +2,16 @@
 // Created by 孙策 on 2020/2/23.
 //
 
-#include <glad/glad.h>
 #define STB_IMAGE_IMPLEMENTATION
+
+#include <glad/glad.h>
 #include <stb/stb_image.h>
 #include "CTexture.hpp"
 #include <iostream>
 #include <string>
+#include <Common/CLog/CLog.hpp>
+
+
 namespace GameClient {
     CTexture::CTexture(const std::string& filename) {
         int nrChannels;
@@ -36,7 +40,7 @@ namespace GameClient {
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, format, GL_UNSIGNED_BYTE, data);
             stbi_image_free(data);
         } else {
-            std::cout << "load " <<filename << "faild" <<std::endl;
+            APP_LOG_ERROR("load texture fail: %s", filename.c_str());
         }
     }
     CTexture::~CTexture() {

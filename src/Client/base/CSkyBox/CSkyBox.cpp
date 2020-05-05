@@ -18,13 +18,13 @@ std::string vl[] = {
 };
 namespace GameClient {
     CSkyBox::CSkyBox(const std::string& skyboxname) {
-        shader = CClient::intance().get_shadermgr().add_shader("resource/shader/skybox/shader.vs", "resource/shader/skybox/shader.fs");
+        shader = CClient::instance().get_shadermgr().add_shader("resource/shader/skybox/shader.vs", "resource/shader/skybox/shader.fs");
         for (int i = 0; i < 6 ; i ++ ) {
             std::string filename("resource/texture/skybox/");
             filename += skyboxname;
             filename += ("_" + vl[i]);
             filename += ".jpg";
-            std::shared_ptr<const CTexture> texture = CClient::intance().get_texturemgr().add_texture(filename);
+            std::shared_ptr<const CTexture> texture = CClient::instance().get_texturemgr().add_texture(filename);
             textureList.push_back(texture);
         }
         // 计算点
@@ -199,7 +199,7 @@ namespace GameClient {
 
     }
     void CSkyBox::draw() {
-        CClient::intance().get_shadermgr().setMat4("model", glm::mat4(1.0));
+        CClient::instance().get_shadermgr().setMat4("model", glm::mat4(1.0));
         for (int i = 0 ; i < 6 ; i++) {
             shader->use();
             glActiveTexture(GL_TEXTURE0);

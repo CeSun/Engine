@@ -12,17 +12,23 @@
 #include <Client/CTextureMgr/CTextureMgr.hpp>
 #include <Client/CLightMgr/CLightMgr.hpp>
 #include <Client/base/CCamera/CCamera.hpp>
+#include <Common/TSingleton/TSingleton.hpp>
+#include <CPage/CPage.hpp>
+
+// 状态
+
+#define DRAW_PAGE (1 << 0)
+#define DRAW_WORLD (1 << 1)
 
 namespace GameClient {
-    class CClient {
+
+    class CClient: public TSingleton <CClient> {
     public:
-        // 单例
-        static CClient& intance();
         // 析构函数
         virtual ~CClient();
         // 执行游戏
         void run ();
-    private:        // methods
+    public:        // methods
         // 构造函数
         CClient();
         // 客户端初始化
@@ -31,6 +37,8 @@ namespace GameClient {
         void processInput();
         // 处理鼠标移动
         void mouse_move(double x,double y);
+
+        void close_client();
 
     private:             // attribute
         GLFWwindow* engineWindow = nullptr;
@@ -49,6 +57,10 @@ namespace GameClient {
         CTextureMgr& get_texturemgr() {
             return texturemgr;
         }
+
+        double getTime() const {
+            return now;
+        }
     private:
         // 着色器管理对象
         CShaderMgr shadermgr;
@@ -58,6 +70,13 @@ namespace GameClient {
         CLightMgr lightMgr;
         // 世界对象
         CWorld world;
+        // 界面对象
+        CPage page;
+        //
+        double now;
+
+        // 绘制状态
+        int DrawState;
     };
 
 }

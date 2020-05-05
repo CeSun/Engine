@@ -22,21 +22,21 @@ namespace GameClient {
         }
     }
     void CLightMgr::update_shader() const {
-        CClient::intance().get_shadermgr().setInt("lightNum", lightMap.size());
+        CClient::instance().get_shadermgr().setInt("lightNum", lightMap.size());
         int i = 0;
         for (auto iter = lightMap.begin(); iter != lightMap.end(); iter++) {
             CLight::LightParam& lightparam = iter->second->lightParam;
             std::stringstream attribute;
             attribute << "lightParam[" << i << "].";
-            CClient::intance().get_shadermgr().setInt(attribute.str() + "lighttype", lightparam.type);
-            CClient::intance().get_shadermgr().setVec3(attribute.str() + "position", lightparam.position);
-            CClient::intance().get_shadermgr().setVec3(attribute.str() + "color", lightparam.color);
-            CClient::intance().get_shadermgr().setVec3(attribute.str() + "direction", lightparam.direction);
-            CClient::intance().get_shadermgr().setFloat(attribute.str() + "cutOff", lightparam.cutOff);
-            CClient::intance().get_shadermgr().setFloat(attribute.str() + "constant", lightparam.attenuation.constant);
-            CClient::intance().get_shadermgr().setFloat(attribute.str() + "linear", lightparam.attenuation.linear);
-            CClient::intance().get_shadermgr().setFloat(attribute.str() + "quadratic", lightparam.attenuation.quadratic);
-            CClient::intance().get_shadermgr().setFloat(attribute.str() + "outerCutOff", lightparam.outerCutOff);
+            CClient::instance().get_shadermgr().setInt(attribute.str() + "lighttype", lightparam.type);
+            CClient::instance().get_shadermgr().setVec3(attribute.str() + "position", lightparam.position);
+            CClient::instance().get_shadermgr().setVec3(attribute.str() + "color", lightparam.color);
+            CClient::instance().get_shadermgr().setVec3(attribute.str() + "direction", lightparam.direction);
+            CClient::instance().get_shadermgr().setFloat(attribute.str() + "cutOff", lightparam.cutOff);
+            CClient::instance().get_shadermgr().setFloat(attribute.str() + "constant", lightparam.attenuation.constant);
+            CClient::instance().get_shadermgr().setFloat(attribute.str() + "linear", lightparam.attenuation.linear);
+            CClient::instance().get_shadermgr().setFloat(attribute.str() + "quadratic", lightparam.attenuation.quadratic);
+            CClient::instance().get_shadermgr().setFloat(attribute.str() + "outerCutOff", lightparam.outerCutOff);
             
             i++;
         }

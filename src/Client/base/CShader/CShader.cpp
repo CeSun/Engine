@@ -8,8 +8,15 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include "CShader.hpp"
+#include <Common/CLog/CLog.hpp>
 
 namespace GameClient {
+    enum CompileType {
+        SHADER,
+        PROGRAM
+    };
+    static void checkCompileErrors(unsigned int id, CompileType type);
+
     CShader::CShader(const std::string& vertexPath, const std::string& fragmentPath) {
 
         std::ifstream vertexFile;
@@ -30,7 +37,7 @@ namespace GameClient {
             fShaderSource = fShaderStream.str();
 
         } catch (const std::exception& ex) {
-            std::cout << ex.what() << std::endl;
+            APP_LOG_ERROR("load shader fail: %s", ex.what());
         }
         unsigned int vertexShader,fragmentShader;
 
@@ -39,13 +46,11 @@ namespace GameClient {
         vertexShader = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertexShader, 1, &vShaderCode, nullptr);
         glCompileShader(vertexShader);
-        std::cout << vertexPath << std::endl;
         checkCompileErrors(vertexShader, CompileType::SHADER);
 
         fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fragmentShader, 1, &fShaderCode, nullptr);
         glCompileShader(fragmentShader);
-        std::cout << fragmentPath << std::endl;
         checkCompileErrors(fragmentShader, CompileType::SHADER);
 
         this->ID = glCreateProgram();
@@ -105,9 +110,9 @@ namespace GameClient {
     {
         glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
-    void CShader::setMat4(const std::string &name, const glm::mat4 &mat) const
+    void CShader::setMat4(const std::string &name, const glm::mat4 &mat, int size) const
     {
-        glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), size, GL_FALSE, &mat[0][0]);
     }
     void CShader::setUinform1i(const std::string& name, GLint index) const {
         glUniform1i(glGetUniformLocation(ID, name.c_str()), index);
@@ -123,13 +128,13 @@ namespace GameClient {
             glGetShaderiv(id, GL_COMPILE_STATUS, &success);
             if (!success) {
                 glGetShaderInfoLog(id, sizeof(infoLog), nullptr, infoLog);
-                std::cout << "[ERROR] Shader Compile faild:" << infoLog << std::endl;
+                APP_LOG_ERROR("Shader Compile faild: %s", infoLog);
             }
         } else {
             glGetProgramiv(id, GL_LINK_STATUS, &success);
             if (!success) {
                 glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog);
-                std:: cout << "[ERROR] Program Link faild:" << infoLog << std::endl;
+                APP_LOG_ERROR(" Program Link faild: %s", infoLog);
             }
         }
     }

@@ -5,15 +5,19 @@
 #include <iostream>
 #include <cstdarg>
 #include <ctime>
+#include "LogImpl.hpp"
 
 #define MAX_BUFFER_SIZE 255
+
 #define APP_LOG_INFO(fmt, ...){ Common::log.log_info(fmt,  ##__VA_ARGS__);};
 #define APP_LOG_ERROR(fmt, ...){ Common::log.log_error(fmt,  ##__VA_ARGS__);};
 #define APP_LOG_WARRING(fmt, ...){ Common::log.log_warring(fmt,  ##__VA_ARGS__);};
 namespace Common {
 	class CLog {
 	public:
-
+		CLog() {
+			this->log = logImpl;
+		}
 		// log
 		void log_info(char* fmt, ...) {
 			int cnt;
@@ -22,7 +26,7 @@ namespace Common {
 			va_start(argptr, fmt);
 			cnt = std::vsnprintf(buffer, MAX_BUFFER_SIZE, fmt, argptr);
 			if (cnt >-1 && cnt < MAX_BUFFER_SIZE)
-				log("info", buffer);
+				log("INFO", buffer);
 			va_end(argptr);
 		}
 
@@ -34,7 +38,7 @@ namespace Common {
 			va_start(argptr, fmt);
 			cnt = std::vsnprintf(buffer, MAX_BUFFER_SIZE, fmt, argptr);
 			if (cnt > -1 && cnt < MAX_BUFFER_SIZE)
-				log("error" ,buffer);
+				log("ERROR" ,buffer);
 			va_end(argptr);
 		}
 
@@ -46,21 +50,15 @@ namespace Common {
 			va_start(argptr, fmt);
 			cnt = std::vsnprintf(buffer, MAX_BUFFER_SIZE, fmt, argptr);
 			if (cnt > -1 && cnt < MAX_BUFFER_SIZE)
-				log("warring", buffer);
+				log("WARRNING", buffer);
 			va_end(argptr);
 		}
 	private:
-		void log(const std::string& type , const std::string& logval) {
-			char tmp[64];
-
-			std::time_t  now;
-			std::time(&now);
-			strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S", std::localtime(&now));
-
-			std::cout << "[" << tmp << "]" << "[" << type << "]"<< ": "<<  logval << "\n";
-		}
+		
+		void (*log)(const std::string& type, const std::string& logval);
 	};
-	Common::CLog log;
+	extern Common::CLog log;
+
 }
 
 
