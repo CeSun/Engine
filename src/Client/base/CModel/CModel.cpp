@@ -25,12 +25,6 @@ namespace GameClient {
         shader->use();
         shader->setInt("TransFormNum", this->BoneTransaform.size());
         shader->setMat4("TransForm", BoneTransaform[0], BoneTransaform.size());
-
-        glm::mat4 model = glm::mat4(1.0);
-        model = glm::translate(model, glm::vec3(70.0f, 1.0f, 100.0f));
-
-        CClient::instance().get_shadermgr().setMat4("model", model);
-
         for (unsigned int i = 0; i < meshes.size(); i++)
             meshes[i].Draw(shader);
 
@@ -132,8 +126,8 @@ namespace GameClient {
             vertex.Position = vector;
             // normals
             vector.x = mesh->mNormals[i].x;
-            vector.y = mesh->mNormals[i].y;
-            vector.z = mesh->mNormals[i].z;
+            vector.y = mesh->mNormals[i].z;
+            vector.z = mesh->mNormals[i].y;
 
             vertex.Normal = vector;
             // texture coordinates
@@ -278,22 +272,30 @@ namespace GameClient {
         }
     }
 
- 
+    void CModel::play() {
+        start_time = time;
+    }
     void CModel::SetUpTransaction() {
         // 先算出当前帧和之后的帧
         // 算出对应的时间
         Animation& animation = animationList[this->current];
-        long long currentTime = ((int)(time * (1000000) - start_time * (1000000))) % ((int)((animation.Duration / animation.Ticks / animation.Ticks) * 1000000));
-        long long allTime = ((animation.Duration / animation.Ticks / animation.Ticks) * 1000000);
-        double per = (currentTime/1000000.0) / (allTime / 1000000.0);
-        int f1 = per * (animation.Duration / animation.Ticks);
-        if (f1 >= (animation.Duration / animation.Ticks)) {
-            f1 = (animation.Duration / animation.Ticks);
+        double AnimationTime = animation.Duration / animation.Ticks / animation.Ticks;
+        double GoonTime = time - start_time;
+        // APP_LOG_INFO("AnimationTime: %lf, GoonTime: %lf, time: %lf", AnimationTime, GoonTime, time);
+        
+        if (current != 0 && is_loop == false) {
+            if (GoonTime > AnimationTime) {
+                current = 0;
+                start_time = time;
+                return SetUpTransaction();
+            }
         }
-        int f2 = f1 + 1;
-        if (f2 >= (animation.Duration / animation.Ticks)) {
-            f2 = 0;
+
+        if (GoonTime > AnimationTime) {
+            start_time = time;
         }
+        GoonTime = time - start_time;
+        int f1 =  (animation.Duration / animation.Ticks) * (GoonTime / AnimationTime);
         TmpBoneTransaform.resize(bones.size());
         BoneTransaform.resize(bones.size());
         for (auto iter : bones) {

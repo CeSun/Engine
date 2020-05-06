@@ -147,6 +147,6 @@ void main()
         }
  
     }
-    FragColor =  vec4(result,1.0) * texture(texture_diffuse1, TexCoord);
+    FragColor = vec4(result,1.0) * texture(texture_diffuse1, TexCoord);
     // FragColor = vec4(debug, 1.0);
 }

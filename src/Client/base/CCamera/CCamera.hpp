@@ -66,7 +66,7 @@ namespace GameClient{
 
         // 处理输入(使用枚举屏蔽硬件)
         void ProcessKeyboard(Camera_Movement direction, float deltaTime) {
-            float velocity = MovementSpeed * deltaTime;
+            float velocity = MovementSpeed * deltaTime * 50;
             if (direction == FORWARD)
                 Position += Front * velocity;
             if (direction == BACKWARD)

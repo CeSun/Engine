@@ -39,6 +39,18 @@ namespace GameClient {
         void mouse_move(double x,double y);
 
         void close_client();
+        void show_world() {
+            DrawState = DrawState | DRAW_WORLD;
+        }
+        void show_page() {
+            DrawState = DrawState | DRAW_PAGE;
+        }
+        void close_world() {
+            DrawState = DrawState & (~DRAW_WORLD);
+        }
+        void close_page() {
+            DrawState = DrawState & (~DRAW_PAGE);
+        }
 
     private:             // attribute
         GLFWwindow* engineWindow = nullptr;
@@ -58,6 +70,10 @@ namespace GameClient {
             return texturemgr;
         }
 
+        // 获取纹理管理对象
+        CLightMgr& get_lightmgr() {
+            return lightMgr;
+        }
         double getTime() const {
             return now;
         }

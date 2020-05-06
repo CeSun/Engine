@@ -14,6 +14,7 @@
 // imgui
 
 
+extern std::shared_ptr<GameClient::CCamera> globalCamera;
 
 #define MAX_CUBUE 101
 #define MAX_BOX 5
@@ -48,25 +49,19 @@ namespace GameClient {
         glEnable(GL_DEPTH_TEST);
 
         // 初始化页面
-        this->page.Init();
+        this->page.Init(engineWindow);
+        // 初始化世界
+        this->world.init(engineWindow);
 
+        show_page();
+        show_world();
         return 0;
 
     }
     void CClient::processInput() {
-        /*
-        if(glfwGetKey(this->engineWindow, GLFW_KEY_ESCAPE))
-            glfwSetWindowShouldClose(this->engineWindow, GLFW_TRUE);
-        if (glfwGetKey(this->engineWindow, GLFW_KEY_W) == GLFW_PRESS)
-            camera->ProcessKeyboard(FORWARD, 0.05);
-        if (glfwGetKey(this->engineWindow, GLFW_KEY_S) == GLFW_PRESS)
-            camera->ProcessKeyboard(BACKWARD, 0.05);
-        if (glfwGetKey(this->engineWindow, GLFW_KEY_A) == GLFW_PRESS)
-            camera->ProcessKeyboard(LEFT, 0.05);
-        if (glfwGetKey(this->engineWindow, GLFW_KEY_D) == GLFW_PRESS)
-            camera->ProcessKeyboard(RIGHT, 0.05);
-         */
-        //demo.inputKey();
+        if (glfwGetKey(this->engineWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+            show_page();
+        world.process_input();
     }
 
     void CClient::close_client() {
@@ -79,32 +74,29 @@ namespace GameClient {
             return;
         while(!glfwWindowShouldClose(this->engineWindow)) {
             now = glfwGetTime();
-            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            glClearColor(0.1f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            // glm::mat4 view = camera->GetViewMatrix();
-            // shadermgr.setMat4("view", view);
-            // shadermgr.setVec3("viewPos", camera->Position);
-            // lightMgr.update_shader();
-            // skybox->draw();
-            /*
-            for(int i = 0 ; i < MAX_CUBUE ; i ++) {
-                if (cube[i] != nullptr)
-                    cube[i]->draw();
+
+            if (is_show_mouse == false) {
+                glfwSetInputMode(this->engineWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
             }
-            for(int i = 0 ; i < MAX_BOX ; i ++) {
-                if (box[i] != nullptr)
-                    box[i]->draw();
-            }*/
-            // model2->Draw(shader);
-            // world.draw();
-            // model->Draw(shader);
-            // 交换缓冲区
+            else {
+                glfwSetInputMode(this->engineWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            }
+
+            lightMgr.update_shader();
+
+            if (DrawState & DRAW_WORLD) {
+                world.draw();
+            }
+
 
             if (DrawState & DRAW_PAGE) {
                 page.Draw();
+                is_show_mouse = true;
             }
-            if (DrawState & DRAW_WORLD) {
-                world.draw();
+            else {
+                is_show_mouse = false;
             }
             glfwSwapBuffers(this->engineWindow);
             // 监听输入
@@ -114,6 +106,9 @@ namespace GameClient {
         }
     }
     void CClient::mouse_move(double xpos, double ypos) {
+        if (DrawState & DRAW_PAGE) {
+            return;
+        }
         static double lastx = 0, lasty = 0;
         static float offsetx = 0 , offsety =0;
         if (lastx == 0 || lasty == 0) {
@@ -125,9 +120,11 @@ namespace GameClient {
             lastx = xpos;
             lasty = ypos;
         }
-        // camera->ProcessMouseMovement(offsetx, offsety);
+        globalCamera->ProcessMouseMovement(offsetx, offsety);
+        world.mouse_move(xpos, ypos);
     }
     void CClient::mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+       
         CClient::instance().mouse_move(xpos, ypos);
     }
 }

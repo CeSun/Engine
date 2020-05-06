@@ -23,6 +23,10 @@ namespace GameClient {
         CModel(const std::string& path, bool gamma = false);
         // 绘制函数
         void Draw(std::shared_ptr<const CShader> shader);
+        void SetAnimation(int index) {
+            this->current = index;
+        }
+        void play();
     private:
         // 加载模型
         void loadModel(const std::string& path);
@@ -38,6 +42,7 @@ namespace GameClient {
         void processAnimate(const aiScene* scene);
         
         void SetUpTransaction();
+
 
         // 获取父结点变换矩阵
         void GenTransaction(Bone& bone, int f, Animation animation);
@@ -67,15 +72,12 @@ namespace GameClient {
         uint32_t current = 3;
         // 倍速播放
         float speed = 1.0;
-        
+        bool is_loop = false;
         std::vector<Animation> animationList;
 
         double time;
 
         double start_time = 0;
-        // 暂未实现
-        glm::vec3 angle;
-        glm::vec3 postion;
 
     };
 }
